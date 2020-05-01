@@ -1,0 +1,38 @@
+if user
+    section.projects.py-5
+      .container.py-md-5
+        form(action="/insurer/products" method="post", enctype="multipart/form-data")
+          .row
+            .col-lg-6
+              .form-group
+                .row
+                  .col-md-8
+                    label(for="") Product Name
+                    input.form-control(type="text" name="product_name" required)
+                  .col.md-4
+                    label Category
+                    select.ui.compact.selection.dropdown.form-control(name='product_category', required )
+                      option(disabled selected value="") Select
+                      option(value='e') Electrical and Mechanical
+                      option(value='b') Health and beauty
+                      option(value='v') Fruits and Veges
+                      option(value='s') Home Services
+                      option(value='r') Real Estate 
+                      option(value='h') Hospitality 
+                      option(value='j') Jobs
+                      option(value='o') Other 
+              .form-group
+                label(for="") Product description
+                textarea.form-control(name="description" row=3 required)
+              .form-group
+                .row
+                  .col-md-6
+                    label Product picture
+                    input.form-control(type="file", name="product_image" required)
+                  .col-md-6
+                    label Product Price
+                    input.form-control(type="number" name="product_price" required)
+              .form-group
+                .row
+                  .col-md-6
+                    button.btn.btn-info(type="submit") Publish Product

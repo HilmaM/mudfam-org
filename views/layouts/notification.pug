@@ -1,0 +1,43 @@
+#alert-msg
+  if success
+    .ui.success.message(style='position: absolute; top: 100px; right: 730px;min-width: 40px;text-align:center;')
+      h1.pink
+        i.fa.fa-check
+        | !{success}
+  if error
+    .ui.error.message(style='position: absolute; top: 100px; right: 630px;min-width: 40px;text-align:center;')
+      p 
+        span 
+          i.fa.fa-thumbs-o-down 
+        //-span  #{error}
+script.
+  $.each(alert-msg function(){
+    if ($('.ui.success.message').length > 0) {
+      setTimeout(function() {
+        $('.ui.success.message').fadeOut(300)
+      }, 300)
+    } else if ($('.ui.error.message').length > 0) {
+      setTimeout(function() {
+        $('.ui.error.message').fadeOut(300)
+      }, 300)
+    }
+    $('.ui.dropdown').dropdown();
+    $('.post-content .avatar-link').popup({
+      inline: true,
+      position: 'bottom right',
+      lastResort: 'bottom right'
+    });
+
+  });
+  /*FADING POPUP MENU*/
+
+  $(document).ready(function () {
+    $.each(alertMSG, function(index, item) {
+      $(item)
+        .popup({
+          popup: $(this).closest('.alertMSG-wrap').siblings('.popup'),
+          on: 'click'
+      });
+    )
+  })
+  /**/
