@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import { Container, Row, Col, Form, Button, InputGroup, Media } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, InputGroup, Media, Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { poemService, accountService } from '@/_services';
-import { SideBar } from '@/PoetryPage';
-import Pagination from './paginate';
+import { poemService, accountService } from '../_services';
+import { SideBar } from '../PoetryPage';
 import { Role } from '../_helpers';
 import { CommentSection, SubscribeMe, CommentList } from '../_miscel';
 import { commentService } from '../_services';
