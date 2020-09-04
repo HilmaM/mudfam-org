@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     index: './src/index.jsx',
   },
