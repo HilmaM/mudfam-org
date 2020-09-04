@@ -57,8 +57,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src/'),
-      FroalaEditor: 'file_name'
+      '@': path.resolve(__dirname, 'src/')
     }
   },
   plugins: [
@@ -72,7 +71,7 @@ module.exports = {
   externals: {
     // global app config object
     config: JSON.stringify({
-      apiUrl: 'http://localhost:7180'
+      apiUrl: 'https://mudfam-server.herokuapp.com/'
     })
   }
 }
