@@ -37,10 +37,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: 'file-loader'
-      },
-      {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         use: "url-loader?limit=10000&mimetype=application/font-woff"
       }, {
@@ -63,15 +59,11 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src/'),
       FroalaEditor: 'file_name'
-    },
-    modules: ['../node_modules/froala-editor/js','node_modules']
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    }),
-    new webpack.ProvidePlugin({
-      FroalaEditor: 'file_name'
     })
   ],
   devServer: {
@@ -84,4 +76,3 @@ module.exports = {
     })
   }
 }
-file_name : 'froala_editor.min.js/froala_editor.pkgd.min.js';
