@@ -48,7 +48,7 @@ function App () {
       </Container>
       <footer className="blog-footer">
         <p>
-          © {moment(Date.now()).format('YYYY')} <a href="http://localhost:8080/">MudFam</a>
+          © {moment(Date.now()).format('YYYY')} <a href="https://mudfam-server.herokuapp.com/">MudFam</a>
         </p>
         <Link to={'/#app'}>Back to Top</Link>
       </footer>
