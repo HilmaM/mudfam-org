@@ -28,3 +28,16 @@ function startApp() {
 startApp().then(component => {
   document.body.appendChild(component);
 });
+
+async function startApp() {
+  const element = render(
+    <Router history={history}>
+      <App />
+    </Router>,
+    document.getElementById('app')
+  )
+  const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
+  
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  return element;
+}
