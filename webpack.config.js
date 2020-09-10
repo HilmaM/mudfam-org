@@ -4,14 +4,15 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
+  devtool: false,
   entry: {
     index: './src/index.jsx',
   },
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
-    publicPath: 'dist',
-    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    path: path.resolve(__dirname, '/'),
   },
   module: {
     rules: [

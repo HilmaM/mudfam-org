@@ -19,7 +19,7 @@ function startApp() {
       </Router>,
       document.getElementById('app')
     )
-  }).catch(error => 'An error occurred while loading the component');
+  }).catch(error => 'An error occurred while loading the component!');
 }
 
 startApp().then(component => {
