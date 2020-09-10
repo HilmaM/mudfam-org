@@ -11,33 +11,13 @@ import { Router } from 'react-router-dom';
 // attempt silent token refresh before startup
 accountService.refreshToken().finally(startApp);
 
-function startApp() { 
-  return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
-    render(
-      <Router history={history}>
-        <App />
-      </Router>,
-      document.getElementById('app')
-    )
-  }).catch(error => 'An error occurred while loading the component!');
-}
-
-/**
- * the start script
- */
-startApp().then(component => {
-  document.body.appendChild(component);
-});
-
-async function startApp() {
-  const element = render(
+function startApp() {
+  render(
     <Router history={history}>
       <App />
     </Router>,
     document.getElementById('app')
   )
-  const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
-  
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  return element;
-}
+};
+
+document.body.appendChild(startApp());
