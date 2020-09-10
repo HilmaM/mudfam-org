@@ -39,3 +39,6 @@ typings
 
 # dist folder
 dist
+
+# My temp file
+.theBak
