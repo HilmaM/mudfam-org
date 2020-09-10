@@ -6,13 +6,19 @@ module.exports = {
   mode: 'production',
   devtool: false,
   entry: {
-    index: './src/index.jsx',
+    index: { import: "./src/index.jsx", dependOn: 'shared' },
+    shared: 'loadash'
   },
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, '/'),
+    path: path.resolve(__dirname, 'dist'),
+  },
+  optimisation: {
+    splitChunks : {
+      chunks: 'all'
+    }
   },
   module: {
     rules: [

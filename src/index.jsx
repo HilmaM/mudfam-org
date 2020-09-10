@@ -22,6 +22,9 @@ function startApp() {
   }).catch(error => 'An error occurred while loading the component!');
 }
 
+/**
+ * the start script
+ */
 startApp().then(component => {
   document.body.appendChild(component);
 });
