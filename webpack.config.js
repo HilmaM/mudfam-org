@@ -6,8 +6,7 @@ module.exports = {
   mode: 'production',
   devtool: false,
   entry: {
-    index: { import: "./src/index.jsx", dependOn: 'shared' },
-    shared: 'loadash'
+    index: './src/index.jsx'
   },
   output: {
     filename: '[name].bundle.js',
