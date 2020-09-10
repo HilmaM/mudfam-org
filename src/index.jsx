@@ -8,6 +8,10 @@ import './styles.less';
 import { App } from './App/Index';
 import { Router } from 'react-router-dom';
 
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
+
 // attempt silent token refresh before startup
 accountService.refreshToken().finally(startApp);
 

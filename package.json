@@ -10,6 +10,7 @@
         "npm": "6.14.6"
     },
     "license": "MIT",
+    "main": "index.jsx",
     "scripts": {
         "start": "webpack-dev-server --open --config webpack.dev.js",
         "build": "webpack --config webpack.prod.js"
@@ -42,6 +43,7 @@
         "less": "^3.11.0",
         "less-loader": "^5.0.0",
         "moment": "^2.27.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
         "path": "^0.12.7",
         "popper.js": "^1.16.1",
         "postcss-loader": "^3.0.0",
