@@ -9,14 +9,16 @@ module.exports = {
   entry: {
     app: './src/index.jsx',
   },
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-  },
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-      '@': path.resolve(__dirname, 'src/')
-    }
+  },
+  output: {
+    filename: '[name].bundle.js',
+    publicPath: 'dist',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   module: {
     rules: [
@@ -64,10 +66,6 @@ module.exports = {
       ignoreOrder: true
     }),
   ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
   externals: {
     // global app config object
     config: JSON.stringify({
