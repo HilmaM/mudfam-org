@@ -15,6 +15,18 @@ if (process.env.NODE_ENV !== 'production') {
 // attempt silent token refresh before startup
 accountService.refreshToken().finally(startApp);
 
+function startApp() { 
+  render(
+    <Router history={history}>
+      <App />
+    </Router>,
+    document.getElementById('app')
+  );
+}
+
+/*
+accountService.refreshToken().finally(startApp);
+
 function startApp() {
   render(
     <Router history={history}>
@@ -24,4 +36,4 @@ function startApp() {
   )
 };
 
-document.body.appendChild(startApp());
+document.body.appendChild(startApp());*/
