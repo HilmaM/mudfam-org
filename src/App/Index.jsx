@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { Navbar, Container } from 'react-bootstrap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+import { 
+  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt
+);
 
 import { Role } from '../_helpers';
 import { accountService } from '../_services';
