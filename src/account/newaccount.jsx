@@ -12,9 +12,9 @@ const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
     <label htmlFor={props.id || props.name}>{label}</label>
-    <input className={"text-input form-control" + (meta.touched && meta.error ? 'is-invalid' : '')} {...field} {...props} />
+    <input {...field} {...props} />
     {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
+      <StyledErrorMessage>{meta.error}</StyledErrorMessage>
     ) : null}
   </>);
 };
@@ -27,7 +27,7 @@ const MyCheckbox = ({ children, ...props }) => {
   return (
     <>
       <label className="checkbox">
-        <input type="checkbox" className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+        <input type="checkbox" {...field} {...props} />
         {children}
       </label>
       {meta.touched && meta.error ? (
@@ -37,25 +37,24 @@ const MyCheckbox = ({ children, ...props }) => {
   );
 };
 
-// Styled components ....
-const StyledSelect = styled.select`
-  /** ... * /
-`;
-
 const StyledErrorMessage = styled.div`
-  /** ... * /
+  color: red;
+  font-size: 10px;
 `;
 
 const StyledLabel = styled.label`
- /** ...* /
-`;
+  color: blue;
+`
 
+const StyledSelect = styled.select`
+  color: black
+`
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
       <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
-      <StyledSelect className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+      <StyledSelect {...field} {...props} />
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
       ) : null}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, useField, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import styled from '@emotion/styled';
 
 import { Col, InputGroup, Button, FormGroup, FormLabel } from 'react-bootstrap';
 
@@ -11,12 +12,13 @@ const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
     <label htmlFor={props.id || props.name}>{label}</label>
-    <input className={"form-control"} {...field} {...props} />
+    <input {...field} {...props} />
     {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
+      <StyledErrorMessage>{meta.error}</StyledErrorMessage>
     ) : null}
   </>);
 };
+
 
 const MyCheckbox = ({ children, ...props }) => {
   // We need to tell useField what type of input this is
@@ -35,6 +37,33 @@ const MyCheckbox = ({ children, ...props }) => {
     </>
   );
 };
+
+const StyledErrorMessage = styled.div`
+  color: red;
+  font-size: 10px;
+`;
+
+const StyledLabel = styled.label`
+  color: blue;
+`
+
+const StyledSelect = styled.select`
+  color: blank
+`
+
+const MySelect = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+      <StyledSelect {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+      ) : null}
+    </>
+  );
+};
+
 
 function RegisterPage ({ history }) {
 
