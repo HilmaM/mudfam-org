@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, Link, useLocation } from 'react-router-dom';
-//import moment from 'moment';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import { Navbar, Container } from 'react-bootstrap';
 
 import { Role } from '../_helpers';
@@ -13,9 +12,6 @@ import { PoetryPageRouter } from '../PoetryPage';
 import { Alert, NavigationBar } from '../navBar';
 import { AdminNav } from '../navBar/AdminNavbar';
 import { Profile } from '../profile/Index';
-
-const today = new Date();
-const year = today.getFullYear().format('YYYY');
 
 function App () {
   const { pathname } = useLocation();
@@ -49,12 +45,6 @@ function App () {
           <Redirect from="*" to="/" />
         </Switch>
       </Container>
-      <footer className="blog-footer">
-        <p>
-          © {year} <a href="https://mudfam-server.herokuapp.com/">MudFam</a>
-        </p>
-        <Link to={'/#app'}>Back to Top</Link>
-      </footer>
     </>
   );
 }

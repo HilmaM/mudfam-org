@@ -5,35 +5,16 @@ import { accountService } from './_services';
 
 import './styles.less';
 
-import { App } from './App/Index';
+import { App } from './App';
 import { Router } from 'react-router-dom';
-
-if (process.env.NODE_ENV !== 'production') {
-  console.log('Looks like we are in development mode!');
-}
-
-// attempt silent token refresh before startup
-accountService.refreshToken().finally(startApp);
 
 function startApp() { 
   render(
     <Router history={history}>
       <App />
     </Router>,
-    document.getElementById('app')
+    document.getElementById('root')
   );
-}
-
-/*
-accountService.refreshToken().finally(startApp);
-
-function startApp() {
-  render(
-    <Router history={history}>
-      <App />
-    </Router>,
-    document.getElementById('app')
-  )
 };
 
-document.body.appendChild(startApp());*/
+startApp();
