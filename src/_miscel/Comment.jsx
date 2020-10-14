@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { poemService, accountService, alertService, commentService } from '../_services';
 import { Media } from 'react-bootstrap';
 
@@ -24,8 +24,8 @@ const MyTextInputTwo = ({ label, ...props }) => {
 }
 
 const MyStyledInput = styled.input`
-padding: .5em;
-border: 1px solid #eee;
+  padding: .5em;
+  border: 1px solid #eee;
 /* ... */
 `
 

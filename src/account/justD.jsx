@@ -187,7 +187,7 @@ function RegisterPage ({ history }) {
                   <FormLabel>Email</FormLabel>
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend" >@</InputGroup.Text>
+                      <InputGroup.Text id="inputGroupPrepend" >..</InputGroup.Text>
                     </InputGroup.Prepend>
                     <MyTextField 
                       name="email"
