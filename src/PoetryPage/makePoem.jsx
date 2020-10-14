@@ -3,7 +3,8 @@ import { Form, Col, FormControl, Button } from 'react-bootstrap';
 import { CATEGORY } from '../constants';
 import { poemService, alertService } from '../_services';
 import CKEditor from '@ckeditor/ckeditor5-react';
-import BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic/ckeditor5-build-classic/build/ckeditor';
+//import '@ckeditor/ckeditor5-build-classic/ckeditor5-build-classic/src/ckeditor';
 
 class CreatePoemPage extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class CreatePoemPage extends Component {
           <Form.Row>
             <div>
               <CKEditor 
-                editor={BalloonEditor}
+                editor={ClassicEditor}
                 data=""
                 onInit={ editor => {
                   console.log('Ready, set go!');

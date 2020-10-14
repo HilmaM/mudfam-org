@@ -1,52 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
-import { Navbar, Container } from 'react-bootstrap';
 
-import { Role } from '../_helpers';
-import { accountService } from '../_services';
-import { PrivateRoute } from '../_components';
-import { Home } from '../HomePage';
-import { Admin } from '../admin/Index';
-import { Account } from '../account/Index';
-import { PoetryPageRouter } from '../PoetryPage';
-import { Alert, NavigationBar } from '../navBar';
-import { AdminNav } from '../navBar/AdminNavbar';
-import { Profile } from '../profile/Index';
+import { Role } from '@/_helpers';
+import { accountService } from '@/_services';
+import { Nav, PrivateRoute, Alert } from '@/_components';
+import { Home } from '@/home';
+import { Profile } from '@/profile';
+import { Admin } from '@/admin';
+import { Account } from '@/account';
 
-function App () {
-  const { pathname } = useLocation();
-   
-  const [user, setUser] = useState({});
+function App() {
+    const { pathname } = useLocation();  
+    const [user, setUser] = useState({});
 
-  useEffect(() => {
-      const subscription = accountService.user.subscribe(x => setUser(x));
-      return subscription.unsubscribe;
-  }, []);
+    useEffect(() => {
+        const subscription = accountService.user.subscribe(x => setUser(x));
+        return subscription.unsubscribe;
+    }, []);
 
-  return (
-    <>
-      <Container className={user}>
-        <header className="blog-header py-3">
-          <Navbar className="row flex-nowrap justify-content-between align-items-center">
-            <NavigationBar />
-          </Navbar>
-        </header>
-        <AdminNav />
-        <div>
-          <Alert />
+    return (
+        <div className={'app-container' + (user && ' bg-light')}>
+            <Nav />
+            <Alert />
+            <Switch>
+                <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
+                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute path="/profile" component={Profile} />
+                <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
+                <Route path="/account" component={Account} />
+                <Redirect from="*" to="/" />
+            </Switch>
         </div>
-        <Switch>
-          <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
-          <PrivateRoute exact path="/" component={Home} />
-          <Route path="/pages" component={ PoetryPageRouter } />
-          <PrivateRoute path="/profile" component={Profile} /> 
-          <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
-          <Route path="/account" component={Account} />
-          <Redirect from="*" to="/" />
-        </Switch>
-      </Container>
-    </>
-  );
+    );
 }
 
-export { App };
+export { App }; 

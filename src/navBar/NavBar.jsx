@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Route, Link } from 'react-router-dom';
 import { Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 
-import { Role } from '../_helpers';
-import { accountService } from '../_services';
+import { Role } from '@/_helpers';
+import { accountService } from '@/_services';
+import { Details } from '../profile/Details';
 
 function NavigationBar() {
   const user = accountService.userValue;

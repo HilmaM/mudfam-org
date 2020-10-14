@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { poemService, accountService, alertService, commentService } from '../_services';
 import { Media } from 'react-bootstrap';
 

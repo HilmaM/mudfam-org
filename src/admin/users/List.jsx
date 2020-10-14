@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { accountService } from '../../_services';
-import { Pagination } from 'react-bootstrap';
+import { accountService } from '@/_services';
+import Pagination from '../../PoetryPage/paginate';
 
 function List({ match }) {
   const { path } = match;
