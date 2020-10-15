@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, Link, useLocation } from 'react-router-dom';
-import moment from 'moment';
 import { Navbar, Container } from 'react-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -15,7 +14,7 @@ library.add(
 
 import { Role } from '../_helpers';
 import { accountService } from '../_services';
-import { PrivateRoute } from '../_components';
+import { Footer, PrivateRoute } from '../_components';
 import { Home } from '../HomePage';
 import { Admin } from '../admin';
 import { Account } from '../account';
@@ -56,12 +55,7 @@ function App () {
           <Redirect from="*" to="/" />
         </Switch>
       </Container>
-      <footer className="blog-footer">
-        <p>
-          © {moment(Date.now()).format('YYYY')} <a href="http://localhost:8080/">MudFam</a>
-        </p>
-        <Link to={'/#app'}>Back to Top</Link>
-      </footer>
+      <Footer />
     </>
   );
 }

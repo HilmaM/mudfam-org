@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Footer() {
   return(
@@ -6,7 +7,7 @@ function Footer() {
     <p>
       © {new Date().getFullYear()} <a href="https://mudfam-server.herokuapp.com/">MudFam</a>
     </p>
-    <Link to={'/#app'} className="btn-link" onClick={scrollerIcon} >Back to Top</Link>
+    <Link to={'#'} className="btn-link" onClick={scrollerIcon} >Back to Top</Link>
   </footer>
   )
 }
