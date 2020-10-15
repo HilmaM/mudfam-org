@@ -1,5 +1,5 @@
-# basilwizi-trust-bamulong
+# mudfam-org-site
 
-The People of the Great River, Kasambabezi
+Making people read is making readers enjoy
 
-Basilwizi is a community based Not for Profit non-governmental organisation. This website was made to showcase what it deals in.
+Mapenzi Mudimba, the man behind this website. let me see how to improve it
