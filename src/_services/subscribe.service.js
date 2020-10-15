@@ -1,35 +1,30 @@
 import config from 'config';
-import { noAuthWrapper, history } from '@/_helpers';
+import { fetchWrapper } from '../_helpers';
 
-const baseUrl = `${config.apiUrl}/subscribe`;
+const baseUrl = `${config.apiUrl}/subscribers`;
 
 export const subscribeService = {
-  saveEmail,
   getAll,
   getById,
-  create,
-  delete: _delete,
+  subscribe,
+  delete: _delete
 };
 
-function saveEmail(params) {
-  return noAuthWrapper.post(`${baseUrl}/saveemail`, params);
-}
-
 function getAll() {
-  return noAuthWrapper.get(baseUrl);
+  return fetchWrapper.get(baseUrl);
 }
 
 function getById(id) {
-  return noAuthWrapper.get(`${baseUrl}/${id}`);
+  return fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
-function create(params) {
-  return noAuthWrapper.post(baseUrl, params);
+function subscribe(params) {
+  return fetchWrapper.post(baseUrl, params);
 }
 
 // prefixed with underscore because 'delete' is a reserved word in javascript
 function _delete(id) {
-  return noAuthWrapper.delete(`${baseUrl}/${id}`)
+  return fetchWrapper.delete(`${baseUrl}/${id}`)
     .then(x => {
       return x;
     });

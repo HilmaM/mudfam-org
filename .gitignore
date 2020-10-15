@@ -36,3 +36,9 @@ typings
 
 # Optional REPL history
 .node_repl_history
+
+# dist folder
+dist
+
+# My temp file
+.theBak

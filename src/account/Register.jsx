@@ -1,117 +1,265 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, useField, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import styled from '@emotion/styled';
 
-import { accountService, alertService } from '@/_services';
+import { Col, InputGroup, Button, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
-function Register({ history }) {
-    const initialValues = {
+import { accountService, alertService } from '../_services';
+
+const MyTextField = ({label, ...props}) => {
+  const [field, meta] = useField(props);
+  return (<>
+    <label htmlFor={props.id || props.name}>{label}</label>
+    <input className={"text-input form-control" + (meta.touched && meta.error ? 'is-invalid' : '')} {...field} {...props} />
+    {meta.touched && meta.error ? (
+      <div className="error" >{meta.error}</div>
+    ) : null}
+  </>);
+};
+
+const MyCheckbox = ({ children, ...props }) => {
+  // We need to tell useField what type of input this is
+  // since React treats radios and checkboxes differently
+  // than inputs/select/textarea.
+  const [field, meta] = useField({ ...props, type: 'checkbox' });
+  return (
+    <>
+      <label className="checkbox">
+        <input type="checkbox" className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+        {children}
+      </label>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
+
+// Styled components ....
+const StyledSelect = styled.select`
+  /** ... * /
+`;
+
+const StyledErrorMessage = styled.div`
+  /** ... * /
+`;
+
+const StyledLabel = styled.label`
+ /** ...* /
+`;
+
+const MySelect = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+      <StyledSelect className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+      ) : null}
+    </>
+  );
+};
+
+function Register ({ history }) {
+
+  return (
+    <Formik  
+      initialValues={{
         title: '',
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
+        gender: '',
+        home_address: '',
+        country: '',
+        phone_number: '',
         email: '',
         password: '',
         confirmPassword: '',
+        bio: '',
         acceptTerms: false
-    };
-
-    const validationSchema = Yup.object().shape({
+      }} 
+      validationSchema={Yup.object({
         title: Yup.string()
-            .required('Title is required'),
-        firstName: Yup.string()
-            .required('First Name is required'),
-        lastName: Yup.string()
-            .required('Last Name is required'),
+          .required('Title is required'),
+        first_name: Yup.string()
+          .required('First Name is required'),
+        last_name: Yup.string()
+          .required('Last Name is required'),
+        gender: Yup.string()
+          .required('Gender is required'),
+        home_address: Yup.string()
+          .required('Home Address is required'),
+        country: Yup.string()
+          .required('Please prodive a country'),
+        phone_number: Yup.string()
+          .required('Must be a number'),
         email: Yup.string()
-            .email('Email is invalid')
-            .required('Email is required'),
+          .email('Email is invalid')
+          .required('Email is required'),
         password: Yup.string()
-            .min(6, 'Password must be at least 6 characters')
-            .required('Password is required'),
+          .required('Password is required')
+          .min(8, 'Password must be at least 8 characters'),
         confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Confirm Password is required'),
+          .when('password', (password, schema) => {
+            if (password) return schema.required('Confirm Password is required');
+          })
+          .oneOf([Yup.ref('password')], 'Passwords must match'),
+        bio: Yup.string()
+          .max(128, 'Maximum of 128 characters reached'),
         acceptTerms: Yup.bool()
-            .oneOf([true], 'Accept Terms & Conditions is required')
-    });
-
-    function onSubmit(fields, { setStatus, setSubmitting }) {
+          .oneOf([true], 'Accept Terms & Conditions is required')
+      })} 
+      onSubmit={(fields, { setStatus, setSubmitting}) => {
         setStatus();
         accountService.register(fields)
-            .then(() => {
-                alertService.success('Registration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
-                history.push('login');
-            })
-            .catch(error => {
-                setSubmitting(false);
-                alertService.error(error);
-            });
-    }
-
-    return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-            {({ errors, touched, isSubmitting }) => (
-                <Form>
-                    <h3 className="card-header">Register</h3>
-                    <div className="card-body">
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label>Title</label>
-                                <Field name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
-                                    <option value=""></option>
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Miss">Miss</option>
-                                    <option value="Ms">Ms</option>
-                                </Field>
-                                <ErrorMessage name="title" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group col-5">
-                                <label>First Name</label>
-                                <Field name="firstName" type="text" className={'form-control' + (errors.firstName && touched.firstName ? ' is-invalid' : '')} />
-                                <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group col-5">
-                                <label>Last Name</label>
-                                <Field name="lastName" type="text" className={'form-control' + (errors.lastName && touched.lastName ? ' is-invalid' : '')} />
-                                <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label>Email</label>
-                            <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
-                            <ErrorMessage name="email" component="div" className="invalid-feedback" />
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label>Password</label>
-                                <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-                                <ErrorMessage name="password" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group col">
-                                <label>Confirm Password</label>
-                                <Field name="confirmPassword" type="password" className={'form-control' + (errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : '')} />
-                                <ErrorMessage name="confirmPassword" component="div" className="invalid-feedback" />
-                            </div>
-                        </div>
-                        <div className="form-group form-check">
-                            <Field type="checkbox" name="acceptTerms" id="acceptTerms" className={'form-check-input ' + (errors.acceptTerms && touched.acceptTerms ? ' is-invalid' : '')} />
-                            <label htmlFor="acceptTerms" className="form-check-label">Accept Terms & Conditions</label>
-                            <ErrorMessage name="acceptTerms" component="div" className="invalid-feedback" />
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">
-                                {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                                Register
-                            </button>
-                            <Link to="login" className="btn btn-link">Cancel</Link>
-                        </div>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-    )
+          .then(() => {
+            alertService.success('Registration successful, please check your email for verification instructions', { keepAfterRouteChange: true });
+            history.push('login');
+          })
+          .catch(error => {
+            setSubmitting(false);
+            alertService.error(error);
+          });
+      }} >
+      {
+        ({ errors, touched, isSubmitting }) =>  (
+          <Form>
+            <h3 className="card-header bg-success" >Create New Account</h3>
+            <div className="card-body">
+              <div className="form-row" >
+                <FormGroup as={Col} >
+                  <MySelect
+                    name="title"
+                    label="Title"
+                  >
+                    <option value="" disabled={true} >Select...</option>
+                    <option value="dr" >Dr</option>
+                    <option value="miss" >Miss</option>
+                    <option value="mr" >Mr</option>
+                    <option value="mrs" >Mrs</option>
+                    <option value="ms" >Ms</option>
+                    <option value="prof" >Prof</option>
+                  </MySelect>
+                  <FormLabel>Title</FormLabel>
+                  <Field  name="title" as="select" >
+                  </Field>
+                  <ErrorMessage name="title" component="div" className="invalid-feedback" />
+                </FormGroup>
+                <FormGroup as={Col} md={5} >
+                  <MyTextField 
+                    label="Fist Name"
+                    name="first_name"
+                    type="text"
+                  />
+                </FormGroup>
+                <FormGroup as={Col} md={5} >
+                  <MyTextField 
+                    label="Surname"
+                    name="last_name"
+                    type="text"
+                  />
+                </FormGroup>
+              </div>
+              <div className="form-row" >
+                <MySelect name="gender" label="Gender" >
+                  <option value="" disabled={true} >Choose...</option>
+                  <option value="female" >Female</option>
+                  <option value="male" >Male</option>
+                </MySelect>
+                <FormGroup as={Col} md="3" >
+                </FormGroup>
+              </div>
+              <div className="form-row" >
+                <FormGroup as={Col} md="12" >
+                  <MyTextField 
+                    label="Home Address"
+                    name="home_address"
+                    type="text"
+                  />
+                </FormGroup>
+              </div>
+              <div className="form-row" >
+                <FormGroup as={Col} md="3" >
+                  <MySelect name="country" label="Country" >
+                    <option value="" disabled={true} >Choose...</option>
+                    <option value="zimbabwe" >Zimbabwe</option>
+                    <option value="africa" >Africa</option>
+                    <option value="asia" >Asia</option>
+                    <option value="america" >America</option>
+                    <option value="europe" >Europe</option>
+                    <option value="australia" >Australia</option>
+                  </MySelect>
+                </FormGroup>
+                <FormGroup as={Col} md="4" >
+                  <MyTextField 
+                    label="Phone Number"
+                    name="phone_number"
+                    type="text"
+                  />
+                </FormGroup>
+              </div>
+              <div className="form-row" >
+                <FormGroup as={Col} md="4" >
+                  <FormLabel>Email</FormLabel>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text id="inputGroupPrepend" >@</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <MyTextField 
+                      name="email"
+                      type="email"
+                      aria-describedby="inputGroupPrepend"
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup as={Col} md="4" >
+                  <MyTextField 
+                    name="password"
+                    type="password"
+                    label="Password"
+                  />
+                </FormGroup>
+                <FormGroup as={Col} md="4" >
+                  <MyTextField 
+                    name="confirmPassword"
+                    type="password"
+                    label="Confirm Password"
+                  />
+                </FormGroup>
+              </div>
+              <FormGroup>
+                <label htmlFor="bio" className="form-input" >Biograph</label>
+                <Field 
+                  as="textarea"
+                  name="bio"
+                  className={"form-control form-input" + (errors.bio && touched.bio ? ' is-invalid' : '')}
+                />
+                <ErrorMessage name="bio" component="div" className="invalid-feedback" />
+              </FormGroup>
+              <FormGroup>
+                <MyCheckbox name="acceptTerms">
+                   Accept the terms and conditions
+                </MyCheckbox>
+              </FormGroup>
+              <div className="form-row" >
+                <FormGroup as={Col} >
+                  <Button className="btn btn-primary" type="submit" disabled={isSubmitting}  >
+                    {isSubmitting && 
+                      <span className="fa fa-spinner" ></span>
+                    }
+                    Register
+                  </Button>
+                  <Link to="login" className="btn btn-link">Cancel</Link>
+                </FormGroup>
+              </div>
+            </div>
+          </Form>
+      )}
+    </Formik>
+  );
 }
 
-export { Register }; 
+export { Register };
