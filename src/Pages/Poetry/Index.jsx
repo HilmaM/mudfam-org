@@ -17,6 +17,7 @@ function Poetry({ match }) {
   const user = accountService.userValue;
 
   const [poems, setPoems] = useState(null);
+  const [comments, setComments] = useState(null);
 
   useEffect(() => {
     poemService.getAll().then(x => setPoems(x));
