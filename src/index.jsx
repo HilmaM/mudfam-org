@@ -18,7 +18,6 @@ function startApp() {
 };
 
 startApp();
-<<<<<<< HEAD
 
 /**
  * Remember to uncomment the line below from a live environment 
@@ -40,7 +39,3 @@ function startApp() {
 startApp().then(component => {
   document.body.appendChild(component);
 });*/
-=======
-
-
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f

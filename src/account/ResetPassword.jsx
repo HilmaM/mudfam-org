@@ -5,17 +5,12 @@ import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import styled from '@emotion/styled';
 
-<<<<<<< HEAD
 import { accountService, alertService } from '@/_services';
-=======
-import { accountService, alertService } from '../_services';
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 import { InputGroup, Button, Row, Col } from 'react-bootstrap';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
-<<<<<<< HEAD
     <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
     <input className={"form-control" + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
     {meta.touched && meta.error ? (
@@ -33,15 +28,6 @@ const StyledLabel = styled.label`
   color: blue;
   font-size: 22px;
 `
-=======
-    <label htmlFor={props.id || props.name}>{label}</label>
-    <input className="text-input form-control" {...field} {...props} />
-    {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
-    ) : null}
-  </>);
-};
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 
 function ResetPassword({ history }) {
   const TokenStatus = {
@@ -103,22 +89,14 @@ function ResetPassword({ history }) {
                 <MyTextField 
                   label="Enter Your New Password"
                   name="password"
-<<<<<<< HEAD
                   type="password"
-=======
-                  type="text"
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 />
               </FormGroup>
               <FormGroup as={Col} md={6} >
                 <MyTextField 
                   label="Re-Enter to Confirm Your Password"
                   name="confirmPassword"
-<<<<<<< HEAD
                   type="password"
-=======
-                  type="text"
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 />
               </FormGroup>
             </Row>
@@ -134,13 +112,8 @@ function ResetPassword({ history }) {
       </Formik>
     );
   }
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
   function getBody() {
     switch (tokenStatus) {
       case TokenStatus.Valid:

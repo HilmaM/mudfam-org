@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import styled from '@emotion/styled';
-=======
-import { Formik, Field, useField, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 
 import { Col, InputGroup, Button, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
@@ -16,22 +11,14 @@ import { accountService, alertService } from '../_services';
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
-<<<<<<< HEAD
     <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
     <input className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
     {meta.touched && meta.error ? (
       <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-=======
-    <label htmlFor={props.id || props.name}>{label}</label>
-    <input className={"text-input form-control"} {...field} {...props} />
-    {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
     ) : null}
   </>);
 };
 
-<<<<<<< HEAD
 const StyledSelect = styled.select`
   color: black;
 `;
@@ -46,8 +33,6 @@ const StyledLabel = styled.label`
   font-size: 22px;
 `
 
-=======
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 const MyCheckbox = ({ children, ...props }) => {
   // We need to tell useField what type of input this is
   // since React treats radios and checkboxes differently
@@ -55,7 +40,6 @@ const MyCheckbox = ({ children, ...props }) => {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
   return (
     <>
-<<<<<<< HEAD
       <StyledLabel className="checkbox">
         <input type="checkbox" {...field} {...props} />
         {children}
@@ -75,14 +59,6 @@ const MySelect = ({ label, ...props }) => {
       <StyledSelect className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-=======
-      <label className="checkbox">
-        <input type="checkbox" {...field} {...props} />
-        {children}
-      </label>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
       ) : null}
     </>
   );
@@ -150,39 +126,24 @@ function RegisterPage ({ history }) {
           });
       }} >
       {
-<<<<<<< HEAD
         ({ isSubmitting }) =>  (
-=======
-        ({ errors, touched, isSubmitting }) =>  (
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
           <Form>
             <h3 className="card-header bg-success" >Create New Account</h3>
             <div className="card-body">
               <div className="form-row" >
                 <FormGroup as={Col} >
-<<<<<<< HEAD
                   <MySelect
                     name="title"
                     label="Title"
                   >
                     <option value="" disabled={true} >Title...</option>
-=======
-                  <FormLabel>Title</FormLabel>
-                  <Field  name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
-                    <option value="" disabled={true} >Select...</option>
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                     <option value="dr" >Dr</option>
                     <option value="miss" >Miss</option>
                     <option value="mr" >Mr</option>
                     <option value="mrs" >Mrs</option>
                     <option value="ms" >Ms</option>
                     <option value="prof" >Prof</option>
-<<<<<<< HEAD
                   </MySelect>
-=======
-                  </Field>
-                  <ErrorMessage name="title" component="div" className="invalid-feedback" />
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 </FormGroup>
                 <FormGroup as={Col} md={5} >
                   <MyTextField 
@@ -201,27 +162,14 @@ function RegisterPage ({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="3" >
-<<<<<<< HEAD
                   <MySelect
                     name="gender"
                     label="Gender"
-=======
-                <FormLabel>Gender</FormLabel>
-                  <Field
-                    as="select"
-                    name="gender"
-                    className={'form-control' + (errors.gender && touched.gender ? ' is-invalid' : '')}
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                   >
                     <option value="" disabled={true} >Choose...</option>
                     <option value="female" >Female</option>
                     <option value="male" >Male</option>
-<<<<<<< HEAD
                   </MySelect>
-=======
-                  </Field>
-                  <ErrorMessage name="gender" component="div" className="invalid-feedback" />
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 </FormGroup>
               </div>
               <div className="form-row" >
@@ -235,18 +183,9 @@ function RegisterPage ({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="3" >
-<<<<<<< HEAD
                   <MySelect
                     name="country"
                     label="Country"
-=======
-                <FormLabel>Country</FormLabel>
-                  <Field
-                    as="select"
-                    type="text"
-                    name="country"
-                    className={'form-control' + (errors.country && touched.country ? ' is-invalid' : '')}
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                   >
                     <option value="" disabled={true} >Choose...</option>
                     <option value="zimbabwe" >Zimbabwe</option>
@@ -255,12 +194,7 @@ function RegisterPage ({ history }) {
                     <option value="america" >America</option>
                     <option value="europe" >Europe</option>
                     <option value="australia" >Australia</option>
-<<<<<<< HEAD
                   </MySelect>
-=======
-                  </Field>
-                  <ErrorMessage name="country" component="div" className="invalid-feedback" />
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 </FormGroup>
                 <FormGroup as={Col} md="4" >
                   <MyTextField 
@@ -272,25 +206,11 @@ function RegisterPage ({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="4" >
-<<<<<<< HEAD
                   <MyTextField 
                     name="email"
                     label="Email"
                     type="email"
                   />
-=======
-                  <FormLabel>Email</FormLabel>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend" >@</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <MyTextField 
-                      name="email"
-                      type="email"
-                      aria-describedby="inputGroupPrepend"
-                    />
-                  </InputGroup>
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                 </FormGroup>
                 <FormGroup as={Col} md="4" >
                   <MyTextField 
@@ -308,21 +228,11 @@ function RegisterPage ({ history }) {
                 </FormGroup>
               </div>
               <FormGroup>
-<<<<<<< HEAD
                 <MyTextField 
                   as="textarea"
                   label="Bio"
                   name="bio"
                 />
-=======
-                <label htmlFor="bio" className="form-input" >Biograph</label>
-                <Field 
-                  as="textarea"
-                  name="bio"
-                  className={"form-control form-input" + (errors.bio && touched.bio ? ' is-invalid' : '')}
-                />
-                <ErrorMessage name="bio" component="div" className="invalid-feedback" />
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
               </FormGroup>
               <FormGroup>
                 <MyCheckbox name="acceptTerms">
@@ -333,11 +243,7 @@ function RegisterPage ({ history }) {
                 <FormGroup as={Col} >
                   <Button className="btn btn-primary" type="submit" disabled={isSubmitting}  >
                     {isSubmitting && 
-<<<<<<< HEAD
                       <span className="fa fa-spinner fa-pulse" ></span>
-=======
-                      <span className="fa fa-spinner" ></span>
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                     }
                     Register
                   </Button>

@@ -3,23 +3,7 @@ import { Link } from 'react-router-dom';
 import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button, FormGroup, Row, Col } from 'react-bootstrap';
-<<<<<<< HEAD
 import styled from '@emotion/styled';
-=======
-
-import { accountService, alertService } from '../_services';
-
-const MyTextField = ({label, ...props}) => {
-  const [field, meta] = useField(props);
-  return (<>
-    <label htmlFor={props.id || props.name}>{label}</label>
-    <input className="text-input form-control" {...field} {...props} />
-    {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
-    ) : null}
-  </>);
-};
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 
 
 const MyTextField = ({label, ...props}) => {
@@ -69,11 +53,7 @@ function ForgotPassword() {
               <MyTextField 
                 label="Email"
                 name="email"
-<<<<<<< HEAD
                 type="email"
-=======
-                type="text"
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
               />
             </FormGroup>
             <Row>

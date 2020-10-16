@@ -24,14 +24,8 @@ const MyTextInputTwo = ({ label, ...props }) => {
 }
 
 const MyStyledInput = styled.input`
-<<<<<<< HEAD
 padding: .5em;
 border: 1px solid #eee;
-=======
-  padding: .5em;
-  border: 1px solid #eee;
-/* ... */
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 `
 
 const MyStyledTextArea = MyStyledInput.withComponent('textarea');
