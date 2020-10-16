@@ -75,7 +75,7 @@ module.exports = {
   externals: {
     // global app config object
     config: JSON.stringify({
-      apiUrl: 'https://mudfam-server.herokuapp.com/'
+      apiUrl: 'http://localhost:7180/'
     })
   }
 }
