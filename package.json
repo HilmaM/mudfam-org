@@ -11,8 +11,9 @@
     "npm": "6.14.6"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --mode development --hot --open --port $PORT",
+    "build": "npm i -dev && webpack --mode production",
+    "heroku-postbuild": "npm build"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
