@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import styled from '@emotion/styled';
 
 import { accountService, alertService } from '@/_services';
-import { InputGroup, Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
+import { Alert } from '../_components';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
@@ -85,6 +86,7 @@ function ResetPassword({ history }) {
         {({ isSubmitting }) => {
           <Form>
             <Row fluid>
+              <Alert />
               <FormGroup as={Col} md={6} >
                 <MyTextField 
                   label="Enter Your New Password"

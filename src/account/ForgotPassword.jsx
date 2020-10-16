@@ -4,6 +4,7 @@ import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button, FormGroup, Row, Col } from 'react-bootstrap';
 import styled from '@emotion/styled';
+import {Alert} from '../_components';
 
 
 const MyTextField = ({label, ...props}) => {
@@ -49,6 +50,7 @@ function ForgotPassword() {
         return (<Form>
           <h3 className="card-header" >Forgot Password</h3>
           <div className="card-body" >
+            <Alert />
             <FormGroup>
               <MyTextField 
                 label="Email"
