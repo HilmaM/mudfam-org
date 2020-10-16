@@ -1,7 +1,7 @@
 {
   "proxies": {
     "/api/": {
-      "origin": "https://mudfam-server.herokuapp.com/"
+      "origin": "${API_URL}"
     }
   }
 }
