@@ -1,19 +1,14 @@
 import config from 'config';
-import { noAuthWrapper, history } from '@/_helpers';
+import { noAuthWrapper } from '@/_helpers';
 
-const baseUrl = `${config.apiUrl}/subscribe`;
+const baseUrl = `${config.apiUrl}/subscribers`;
 
 export const subscribeService = {
-  saveEmail,
   getAll,
   getById,
-  create,
-  delete: _delete,
+  subscribe,
+  delete: _delete
 };
-
-function saveEmail(params) {
-  return noAuthWrapper.post(`${baseUrl}/saveemail`, params);
-}
 
 function getAll() {
   return noAuthWrapper.get(baseUrl);
@@ -23,7 +18,7 @@ function getById(id) {
   return noAuthWrapper.get(`${baseUrl}/${id}`);
 }
 
-function create(params) {
+function subscribe(params) {
   return noAuthWrapper.post(baseUrl, params);
 }
 

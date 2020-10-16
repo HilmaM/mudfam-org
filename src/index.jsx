@@ -1,15 +1,12 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
 import { render } from 'react-dom';
-
 import { history } from './_helpers';
 import { accountService } from './_services';
-import { App } from './app';
 
 import './styles.less';
 
-// attempt silent token refresh before startup
-//accountService.refreshToken().finally(startApp);
+import { App } from './App/Index';
+import { Router } from 'react-router-dom';
 
 function startApp() { 
   render(
@@ -18,9 +15,27 @@ function startApp() {
     </Router>,
     document.getElementById('app')
   );
-}
+};
+
+startApp();
 
 /**
- * Start the app
- */
-startApp();
+ * Remember to uncomment the line below from a live environment 
+ *
+// attempt silent token refresh before startup
+//accountService.refreshToken().finally(startApp);
+
+function startApp() { 
+  return import(/* webpackChunkName: "lodash" * 'lodash').then(({ default: _ }) => {
+    render(
+      <Router history={history}>
+        <App />
+      </Router>,
+      document.getElementById('app')
+    )
+  }).catch(error => 'An error occurred while loading the component');
+}
+
+startApp().then(component => {
+  document.body.appendChild(component);
+});*/

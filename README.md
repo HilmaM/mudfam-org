@@ -1,5 +1,5 @@
-# mudfam-org-site
+# react-redux-registration-login-example
 
-Making people read is making readers enjoy
+React + Redux - User Registration and Login Tutorial & Example
 
-Mapenzi Mudimba, the man behind this website. let me see how to improve it
+For documentation and further details go to https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
