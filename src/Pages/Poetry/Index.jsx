@@ -9,6 +9,8 @@ import { CommentSection, SubscribeMe, CommentList } from '../../_miscel';
 import { commentService } from '../../_services';
 import { PoemList } from './poemList';
 import { PoemNav } from './poetry';
+import { PoemPost } from './poemPost';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Poetry({ match }) {
   const { path } = match;
@@ -40,6 +42,7 @@ function Poetry({ match }) {
           <div className="row" >
             <Switch>
               <Route exact path={path} component={PoemList} />
+              <Route path={`${path}/:id`} component={PoemPost} />
             </Switch>
           </div>
         </Col>
@@ -51,7 +54,7 @@ function Poetry({ match }) {
                 placeholder="Search..."
               />
               <InputGroup.Append>
-                  <Button className="btn btn-primary" ><span className="fa fa-search" ></span></Button>
+                  <Button className="btn btn-primary" ><FontAwesomeIcon icon="search" /></Button>
               </InputGroup.Append>
             </InputGroup>
           </Form>

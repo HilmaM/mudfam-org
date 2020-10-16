@@ -5,11 +5,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import { 
-  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt
+  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt
+  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch
 );
 
 import { Role } from '@/_helpers';

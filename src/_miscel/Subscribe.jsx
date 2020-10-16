@@ -4,11 +4,19 @@ import * as Yup from 'yup';
 import { InputGroup, Button } from 'react-bootstrap';
 
 import { subscribeService, alertService } from '../_services';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MyText = ({ ...props }) => {
   const [field, meta] = useField(props);
   return (<>
-    <input className="form-control" {...field} {...props} />
+    <InputGroup>
+      <input className={"form-control"  + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+      <InputGroup.Append>
+        <Button type="submit" className="btn-primary" >
+          <FontAwesomeIcon icon="thumbs-up" />
+        </Button>
+      </InputGroup.Append>
+    </InputGroup>
     {meta.touched && meta.error ? (
       <div className="error" >{meta.error}</div>
     ) : null}
@@ -42,19 +50,12 @@ function SubscribeMe () {
       ({isSubmitting}) => {
         return (
           <Form>
-            <InputGroup>
-              <MyText
-                name="email"
-                type="email"
-                placeholder="Subscribe to us..."
-                disabled={isSubmitting}
-              />
-              <InputGroup.Append>
-                <Button type="submit" className="btn-primary" >
-                  <span className="fa fa-thumbs-up" ></span>
-                </Button>
-              </InputGroup.Append>
-            </InputGroup>
+            <MyText
+              name="email"
+              type="email"
+              placeholder="Subscribe to us..."
+              disabled={isSubmitting}
+            />
           </Form>
         )
       }

@@ -6,12 +6,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 import { FormGroup, Button, Col } from 'react-bootstrap';
-<<<<<<< HEAD:src/Pages/Poetry/makePoem.jsx
 import { poemService, alertService } from '../../_services';
-=======
-import { CATEGORY } from '../constants';
-import { poemService, alertService } from '../_services';
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f:src/PoetryPage/makePoem.jsx
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
@@ -24,10 +19,6 @@ const MyTextField = ({label, ...props}) => {
   </>);
 };
 
-<<<<<<< HEAD:src/Pages/Poetry/makePoem.jsx
-=======
-
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f:src/PoetryPage/makePoem.jsx
 const MyCheckbox = ({ children, ...props }) => {
   // We need to tell useField what type of input this is
   // since React treats radios and checkboxes differently
@@ -56,11 +47,7 @@ const StyledLabel = styled.label`
 `
 
 const StyledSelect = styled.select`
-<<<<<<< HEAD:src/Pages/Poetry/makePoem.jsx
   color: black
-=======
-  color: blank
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f:src/PoetryPage/makePoem.jsx
 `
 
 const MySelect = ({ label, ...props }) => {
@@ -86,11 +73,7 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
         initialValues={{
           poet_name: '', 
           poem_title: '', 
-<<<<<<< HEAD:src/Pages/Poetry/makePoem.jsx
           category: '',
-=======
-          category: [],
->>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f:src/PoetryPage/makePoem.jsx
         }} 
         validationSchema={Yup.object({
           poet_name: Yup.string()

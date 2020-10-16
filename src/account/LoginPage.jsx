@@ -65,9 +65,9 @@ function LoginPage ({ history }) {
             <h3 className="card-header">Login</h3>
             <Row className="card-body">
               <Alert />
-              <Col md={{ span: 6, offset: 1 }} >
+              <Col md={{ span: 6 }} className="bg-dark" >
                 <Row>
-                  <Col md="auto" className="p-2" >
+                  <Col md="auto">
                     <FormGroup md={6} >
                       <MyTextField
                         type="email"
@@ -95,7 +95,7 @@ function LoginPage ({ history }) {
                   </Col>
                 </Row>
               </Col>
-              <Col md={{ span:4, offset:1 }} >
+              <Col md={{ span:6 }} className="border" >
                 <p className="text-right">New account<Link to="register"  className="btn btn-link pr-0" >Registration</Link></p>
                 <p className="text-right" >
                   <Link to="forgot-password" className="btn btn-link pr-0">Forgot Password?</Link>
