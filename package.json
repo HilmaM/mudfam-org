@@ -69,5 +69,13 @@
     "file-loader": "^6.1.0",
     "svg-inline-loader": "^0.8.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:7180/",
+      "pathRewrite": {
+        "^/api": "/"
+      }
+    }
+  }
 }

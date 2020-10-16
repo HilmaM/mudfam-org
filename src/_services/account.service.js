@@ -4,7 +4,7 @@ import config from 'config';
 import { fetchWrapper, history } from '../_helpers';
 
 const userSubject = new BehaviorSubject(null);
-const baseUrl = `${config.apiUrl}/users`;
+const baseUrl = `${config.apiUrl}/accounts`;
 /**
  * Remember to activate back the 
  * //startRefreshTokenTimer() and 
