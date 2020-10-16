@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { accountService } from '@/_services';
+import { accountService } from '../../_services';
+import Pagination from '../../PoetryPage/paginate';
 
 function List({ match }) {
   const { path } = match;
@@ -56,6 +57,15 @@ function List({ match }) {
               </td>
             </tr>
           )}
+<<<<<<< HEAD
+=======
+          <Pagination
+            items={users}
+            onChangePage={onChangePage}
+            pageSize={20}
+            initialPage={1}
+          />
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
           {!users &&
             <tr>
               <td colSpan="4" className="text-center">

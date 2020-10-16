@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
+<<<<<<< HEAD
 import { Formik, Form, useField } from 'formik';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -28,6 +29,14 @@ const StyledLabel = styled.label`
   color: blue;
   font-size: 22px;
 `
+=======
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Link } from 'react-router-dom';
+
+import { FormGroup, Col, InputGroup, FormLabel, Button, Row } from 'react-bootstrap';
+
+import { accountService, alertService } from '../_services';
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 
 function LoginPage ({ history }) {
   const initialValues = {
@@ -57,7 +66,11 @@ function LoginPage ({ history }) {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} >
+<<<<<<< HEAD
       {( { isSubmitting } ) =>
+=======
+      {( { errors, touched, isSubmitting } ) =>
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
         (
           <Form >
             <h3 className="card-header">Login</h3>
@@ -66,6 +79,7 @@ function LoginPage ({ history }) {
                 <Row>
                   <Col md="auto" className="p-2" >
                     <FormGroup md={6} >
+<<<<<<< HEAD
                       <MyTextField
                         type="email"
                         name="email"
@@ -78,13 +92,51 @@ function LoginPage ({ history }) {
                         name="password"
                         placeholder="Password"
                       />
+=======
+                      <FormLabel htmlFor="inlineFormInput" srOnly >
+                        Email
+                      </FormLabel>
+                      <InputGroup className="mb-2" >
+                        <InputGroup.Prepend>
+                          <InputGroup.Text><span className="fa fa-user" ></span></InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Field 
+                          id="inlineFormInput"
+                          type="text"
+                          name="email"
+                          placeholder="Username"
+                          className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                        />
+                        <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                      </InputGroup>
+                    </FormGroup>
+                    <FormGroup md={6} >
+                      <FormLabel htmlFor="inlineFormInputGroup" srOnly>Password</FormLabel>
+                      <InputGroup className="mb-2" >
+                        <InputGroup.Prepend>
+                          <InputGroup.Text><span className="fa fa-key" ></span></InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Field 
+                          id="inlineFormInputGroup"
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')}
+                        />
+                        <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                      </InputGroup>
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                     </FormGroup>
                   </Col>
                   <Col md={5} className="p-4" >
                     <Row>
                       <Button type="submit" className="btn btn-info" disabled={isSubmitting} >
                         {isSubmitting &&
+<<<<<<< HEAD
                           <span className="fa fa-spinner fa-pulse" ></span>
+=======
+                          <span className="fa fa-spinner fa-spin" ></span>
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
                         } 
                         <span className="fa fa-sign-in" ></span> Login
                       </Button>

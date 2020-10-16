@@ -35,4 +35,14 @@ typings
 .npm
 
 # Optional REPL history
+<<<<<<< HEAD
 .node_repl_history
+=======
+.node_repl_history
+
+# dist folder
+dist
+
+# My temp file
+.theBak
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f

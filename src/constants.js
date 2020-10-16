@@ -13,6 +13,11 @@ export const COUNTRY = {
 }
  
 export const CATEGORY = {
+<<<<<<< HEAD
+=======
+  all: 'all',
+  makenew: 'makenew',
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
   World: 'world',
   Zimbabwe: 'zimbabwe',
   Africa: 'africa',
@@ -24,7 +29,13 @@ export const CATEGORY = {
   Culture: 'culture',
   Travel: 'travel',
   Technology: 'technology',
+<<<<<<< HEAD
   Opinion: 'opinion'
+=======
+  Opinion: 'opinion',
+  Tonga: 'tonga',
+  Personal: 'personal'
+>>>>>>> 6a2ee12f94e74cf6b2c5ea1a8edeb44466525e0f
 } 
 
 export const NAME_TITLES = {

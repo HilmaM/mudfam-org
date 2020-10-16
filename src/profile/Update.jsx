@@ -4,7 +4,18 @@ import { Formik, useField, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Col, InputGroup, Button, FormGroup, FormLabel } from 'react-bootstrap';
 
-import { accountService, alertService } from '@/_services';
+import { accountService, alertService } from '../_services';
+
+const MyTextField = ({label, ...props}) => {
+  const [field, meta] = useField(props);
+  return (<>
+    <label htmlFor={props.id || props.name}>{label}</label>
+    <input className="text-input form-control" {...field} {...props} />
+    {meta.touched && meta.error ? (
+      <div className="error" >{meta.error}</div>
+    ) : null}
+  </>);
+};
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
