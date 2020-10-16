@@ -11,7 +11,7 @@
     "npm": "6.14.6"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot --open --port $PORT",
+    "start": "webpack-dev-server --mode development --hot --open",
     "build": "npm i -dev && webpack --mode production",
     "heroku-postbuild": "npm build"
   },
