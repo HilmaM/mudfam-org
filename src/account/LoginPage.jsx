@@ -3,10 +3,12 @@ import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { FormGroup, Col, Button, Row } from 'react-bootstrap';
 
 import { accountService, alertService } from '@/_services';
+import { Alert } from '../_components';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
@@ -18,7 +20,7 @@ const MyTextField = ({label, ...props}) => {
     ) : null}
   </>);
 };
-
+ 
 const StyledErrorMessage = styled.div`
   color: red;
   font-size: 10px;
@@ -62,6 +64,7 @@ function LoginPage ({ history }) {
           <Form >
             <h3 className="card-header">Login</h3>
             <Row className="card-body">
+              <Alert />
               <Col md={{ span: 6, offset: 1 }} >
                 <Row>
                   <Col md="auto" className="p-2" >
@@ -84,9 +87,9 @@ function LoginPage ({ history }) {
                     <Row>
                       <Button type="submit" className="btn btn-info" disabled={isSubmitting} >
                         {isSubmitting &&
-                          <span className="fa fa-spinner fa-pulse" ></span>
+                          <FontAwesomeIcon icon="spinner" pulse />
                         } 
-                        <span className="fa fa-sign-in" ></span> Login
+                        <FontAwesomeIcon icon="sign-in-alt" /> Login
                       </Button>
                     </Row>
                   </Col>

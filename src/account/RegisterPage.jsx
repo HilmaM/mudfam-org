@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
 import styled from '@emotion/styled';
-
-import { Col, InputGroup, Button, FormGroup, FormLabel, Row } from 'react-bootstrap';
+import { Col, Button, FormGroup } from 'react-bootstrap';
 
 import { accountService, alertService } from '../_services';
+import { Alert } from '../_components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
@@ -130,6 +131,7 @@ function RegisterPage ({ history }) {
           <Form>
             <h3 className="card-header bg-success" >Create New Account</h3>
             <div className="card-body">
+              <Alert />
               <div className="form-row" >
                 <FormGroup as={Col} >
                   <MySelect
@@ -243,7 +245,7 @@ function RegisterPage ({ history }) {
                 <FormGroup as={Col} >
                   <Button className="btn btn-primary" type="submit" disabled={isSubmitting}  >
                     {isSubmitting && 
-                      <span className="fa fa-spinner fa-pulse" ></span>
+                      <FontAwesomeIcon icon="spinner" pulse />
                     }
                     Register
                   </Button>
