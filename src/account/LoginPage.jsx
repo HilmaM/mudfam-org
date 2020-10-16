@@ -45,9 +45,9 @@ function LoginPage ({ history }) {
       password: Yup.string()
         .required('Password is required')
     })} 
-    onSubmit={(fields, { setStatus, setSubmitting}) => {
+    onSubmit={({email, password}, { setStatus, setSubmitting}) => {
       setStatus();
-      accountService.login(fields)
+      accountService.login(email, password)
         .then(() => {
           const { from } = location.state || { from: { pathname: "/" } };
           history.push(from);
