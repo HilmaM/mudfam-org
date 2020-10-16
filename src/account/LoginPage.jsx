@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { FormGroup, Col, Button, Row } from 'react-bootstrap';
 
-import { accountService, alertService } from '@/_services';
+import { accountService, alertService } from '../_services';
 import { Alert } from '../_components';
 
 const MyTextField = ({label, ...props}) => {
@@ -32,33 +32,32 @@ const StyledLabel = styled.label`
 `
 
 function LoginPage ({ history }) {
-  const initialValues = {
-    email: '',
-    password: ''
-  };
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
-    password: Yup.string().required('Password is required')
-  });
-
-  function onSubmit({ email, password }, { setSubmitting }) {
-    alertService.clear();
-    accountService.login(email, password)
-      .then(() => {
-        const { from } = location.state || { from: { pathname: "/" } };
-        history.push(from);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        alertService.error(error);
-      });
-  }
-
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} >
+    <Formik
+      initialValues={{
+        email: '',
+        password: ''
+    }} 
+    validationSchema={Yup.object().shape({
+      email: Yup.string()
+        .email('Email is invalid')
+        .required('Email is required'),
+      password: Yup.string()
+        .required('Password is required')
+    })} 
+    onSubmit={(fields, { setStatus, setSubmitting}) => {
+      setStatus();
+      accountService.login(fields)
+        .then(() => {
+          const { from } = location.state || { from: { pathname: "/" } };
+          history.push(from);
+        })
+        .catch(error => {
+          setSubmitting(false);
+          alertService.error(error);
+        });
+    }} 
+    >
       {( { isSubmitting } ) =>
         (
           <Form >

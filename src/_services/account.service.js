@@ -1,16 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
 
 import config from 'config';
-import { fetchWrapper, history } from '../_helpers';
+import { fetchWrapper, history } from '@/_helpers';
 
 const userSubject = new BehaviorSubject(null);
 const baseUrl = `${config.apiUrl}/accounts`;
-/**
- * Remember to activate back the 
- * //startRefreshTokenTimer() and 
- * //stopRefreshTokenTimer() for
- * a live environment
- */
+
 export const accountService = {
   login,
   logout,
@@ -34,7 +29,7 @@ function login(email, password) {
     .then(user => {
       // publish user to subscribers and start timer to refresh token
       userSubject.next(user);
-      //startRefreshTokenTimer();
+      startRefreshTokenTimer();
       return user;
     });
 }
@@ -42,7 +37,7 @@ function login(email, password) {
 function logout() {
   // revoke token, stop refresh timer, publish null to user subscribers and redirect to login page
   fetchWrapper.post(`${baseUrl}/revoke-token`, {});
-  //stopRefreshTokenTimer();
+  stopRefreshTokenTimer();
   userSubject.next(null);
   history.push('/account/login');
 }
@@ -94,9 +89,9 @@ function update(id, params) {
     .then(user => {
       // update stored user if the logged in user updated their own record
       if (user.id === userSubject.value.id) {
-        // publish updated user to subscribers
-        user = { ...userSubject.value, ...user };
-        userSubject.next(user);
+          // publish updated user to subscribers
+          user = { ...userSubject.value, ...user };
+          userSubject.next(user);
       }
       return user;
     });
