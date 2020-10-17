@@ -11,6 +11,7 @@ import { PoemList } from './poemList';
 import { PoemNav } from './poetry';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PoemWriter } from './makePoem';
+import { PoemPost } from './poemPost';
 
 function Poetry({ match }) {
   const { path } = match;
@@ -50,6 +51,7 @@ function Poetry({ match }) {
           <div className="row" >
             <Switch>
               <Route exact path={path} component={PoemList} />
+              <Route path={`${path}/read/:id`} component={PoemPost} />
               <Route path={`${path}/write`} component={PoemWriter} />
             </Switch>
           </div>

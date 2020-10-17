@@ -33,10 +33,10 @@ function PoemList ({ match }) {
                 <h3 className="mb-0">{poem.poem_title}</h3>
                 <div className="mb-1 text-muted">{moment(poem.createdAt).format('MMMM, Do YYYY')}</div>
                 <p className="card-text mb-auto">{poem.poet_name}</p>
-                <Link to={`${path}/${poem.poem_title}`} className="stretched-link">Continue reading</Link>
+                <Link to={`${path}/read/${poem.id}`} className="stretched-link">Continue reading</Link>
               </div>
               <div className="col-auto d-none d-lg-block">
-                <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                <svg className="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
               </div>
             </div>
           </div>
