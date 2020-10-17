@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { poemService } from '../../_services';
 
@@ -27,6 +28,9 @@ function PoemPost ({ match }) {
               <p dangerouslySetInnerHTML={{__html:poem.poem_content}} className="editor" />
             </div>
           </div>
+        }
+        {
+          !poem && <FontAwesomeIcon icon="spnner" grow />
         }
       </Row>
       <footer className="jumbotron p-4 p-md-5 text-white rounded bg-secondary">
