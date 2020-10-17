@@ -4,6 +4,7 @@ import { Route, Link } from "react-router-dom";
 import { CATEGORY } from '@/constants';
 
 function PoemNav () {
+
   
   return(
     <div className="nav-scroller py-1 mb-2 nav-bg-col">
@@ -15,7 +16,7 @@ function PoemNav () {
                 () => {
                   if(key){
                     return (
-                    <Link to={'#'} className="text-muted" key={key.id} >{key.toUpperCase()}</Link>
+                    <Link to={`/pages/poetry/${key.toLowerCase()}`} className="text-muted" key={key.id} >{key.toUpperCase()}</Link>
                     )
                   }
                 }
