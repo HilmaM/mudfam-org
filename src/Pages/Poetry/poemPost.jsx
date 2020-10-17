@@ -23,7 +23,7 @@ function PoemPost ({id}) {
         <Col md={8} className="blog-main" >
           <div className="blog-post" >
             {
-              poem && poems.map(poem => <>
+              poems.map(poem => <>
                 <h1 className="blog-post-title" >
                   {poem.poem_title}
                 </h1>

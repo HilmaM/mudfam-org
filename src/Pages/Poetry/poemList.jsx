@@ -44,6 +44,9 @@ function PoemList ({ match }) {
     {
       !poems && <div className="text-center"><div className="spinner-border spinner-border-lg align-center"></div></div>
     }
+    {
+      poems && !poems.length && <h3 className="text-center">Nothing to show!</h3>
+    }
   </>);
 }
 

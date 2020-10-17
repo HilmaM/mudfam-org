@@ -9,8 +9,8 @@ import { CommentSection, SubscribeMe, CommentList } from '../../_miscel';
 import { commentService } from '../../_services';
 import { PoemList } from './poemList';
 import { PoemNav } from './poetry';
-import { PoemPost } from './poemPost';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PoemWriter } from './makePoem';
 
 function Poetry({ match }) {
   const { path } = match;
@@ -28,22 +28,29 @@ function Poetry({ match }) {
     <Container fluid>
       <Row>
         <Col md={8} className="blog-main">
+            <nav className="bg-dark nav d-flex justify-content-between p-2" >
+              <Link to={`${path}/write`} className="nav-link nav-item" >New Poem</Link>
+              <Link to="#" className="nav-link nav-item" >Edit</Link>
+              <Link to="#" className="nav-link nav-item" >Remove</Link>
+              <Link to="#" className="nav-link nav-item" >Search</Link>
+              <Link to="#" className="nav-link nav-item" >Tools</Link>
+            </nav>
           {
             user ?
             user.role === Role.Admin && 
             <nav className="bg-dark nav d-flex justify-content-between p-2" >
               <Link to={`${path}/write`} className="nav-link nav-item" >New Poem</Link>
-              <Link className="nav-link nav-item" >Edit</Link>
-              <Link className="nav-link nav-item" >Remove</Link>
-              <Link className="nav-link nav-item" >Search</Link>
-              <Link className="nav-link nav-item" >Tools</Link>
+              <Link to="#" className="nav-link nav-item" >Edit</Link>
+              <Link to="#" className="nav-link nav-item" >Remove</Link>
+              <Link to="#" className="nav-link nav-item" >Search</Link>
+              <Link to="#" className="nav-link nav-item" >Tools</Link>
             </nav>
             : ''
           }
           <div className="row" >
             <Switch>
               <Route exact path={path} component={PoemList} />
-              <Route path={`${path}/:id`} component={PoemPost} />
+              <Route path={`${path}/write`} component={PoemWriter} />
             </Switch>
           </div>
         </Col>

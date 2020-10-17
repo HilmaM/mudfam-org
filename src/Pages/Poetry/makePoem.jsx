@@ -7,6 +7,7 @@ import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 import { FormGroup, Button, Col } from 'react-bootstrap';
 import { poemService, alertService } from '../../_services';
+import { Alert } from '../../_components';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
@@ -96,7 +97,7 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
           if (isAddMode) {
             poemService.upload(data)
               .then(() => {
-                alertService.success('Poem poem Created', {keepAfterRouteChange: true});
+                alertService.success('Poem Created', {keepAfterRouteChange: true});
                 history.push('.');
               })
               .catch(error => {
@@ -127,6 +128,7 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
             return (<Form>
               <h1>{isAddMode ? 'Write your poem' : 'Editing an poem'}</h1>
               <div >
+                <Alert />
                 <FormGroup as={Col} md={3}>
                   <MySelect label="Poem Category" name="category">
                     <option value="">Select poem category</option>
