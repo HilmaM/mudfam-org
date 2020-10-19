@@ -4,11 +4,15 @@ import { noAuthWrapper } from '@/_helpers';
 const baseUrl = `${config.apiUrl}/subscribers`;
 
 export const subscribeService = {
+  subscribe,
   getAll,
   getById,
-  subscribe,
   delete: _delete
 };
+
+function subscribe(params) {
+  return noAuthWrapper.post(`${baseUrl}/saveemail`, params);
+}
 
 function getAll() {
   return fetchWrapper.get(baseUrl);
@@ -16,10 +20,6 @@ function getAll() {
 
 function getById(id) {
   return fetchWrapper.get(`${baseUrl}/${id}`);
-}
-
-function subscribe(params) {
-  return noAuthWrapper.post(baseUrl, params);
 }
 
 // prefixed with underscore because 'delete' is a reserved word in javascript

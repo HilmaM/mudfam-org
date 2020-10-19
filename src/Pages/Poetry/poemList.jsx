@@ -28,9 +28,9 @@ function PoemList ({ match }) {
         poems.map(poem => 
           <div key={poem.id} className="col-md-4" >
             <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-              <div className="col p-4 d-flex flex-column position-static">
+              <div className="col p-4 d-flex flex-column position-static reader-col">
                 <strong className="d-inline-block mb-2 text-primary">{poem.category}</strong>
-                <h3 className="mb-0">{poem.poem_title}</h3>
+                <h3 dangerouslySetInnerHTML={{ __html: poem.poem_title }} />
                 <div className="mb-1 text-muted">{moment(poem.createdAt).format('MMMM, Do YYYY')}</div>
                 <p className="card-text mb-auto">{poem.poet_name}</p>
                 <Link to={`${path}/read/${poem.id}`} className="stretched-link">Continue reading</Link>

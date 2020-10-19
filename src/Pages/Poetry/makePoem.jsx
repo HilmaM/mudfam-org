@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import styled from '@emotion/styled';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { FormGroup, Button, Col } from 'react-bootstrap';
+import { FormGroup, Button, Col, Row } from 'react-bootstrap';
 import { poemService, alertService } from '../../_services';
 import { Alert } from '../../_components';
 
@@ -13,7 +14,7 @@ const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
     <label htmlFor={props.id || props.name}>{label}</label>
-    <input {...field} {...props} />
+    <input className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
     {meta.touched && meta.error ? (
       <StyledErrorMessage>{meta.error}</StyledErrorMessage>
     ) : null}
@@ -28,7 +29,7 @@ const MyCheckbox = ({ children, ...props }) => {
   return (
     <>
       <label className="checkbox">
-        <input type="checkbox" {...field} {...props} />
+        <input type="checkbox" className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
         {children}
       </label>
       {meta.touched && meta.error ? (
@@ -56,7 +57,7 @@ const MySelect = ({ label, ...props }) => {
   return (
     <>
       <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
-      <StyledSelect {...field} {...props} />
+      <StyledSelect className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
       {meta.touched && meta.error ? (
         <StyledErrorMessage>{meta.error}</StyledErrorMessage>
       ) : null}
@@ -64,32 +65,31 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
+function PoemWriter ({ match, history, doc, onSave }) {
+  const { id } = match.params;
   const isAddMode = !id;
   const [poem_content, setContent] = useState("");
+  const [poem_title, setTitle] = useState("");
   const [dirty, setDirty] = useState(false);
+  const APIURL = poemService.imgUrl();
+
   return (
-    <section className="container" >
+    <section className="container px-md-3" >
       <Formik  
         initialValues={{
           poet_name: '', 
-          poem_title: '', 
           category: '',
-        }} 
+        }}
         validationSchema={Yup.object({
           poet_name: Yup.string()
             .required('Names of the Author are required'),
-          poem_title: Yup.string()
-            .min(3, 'At least 3 characters minimum')
-            .max(256, 'Title should not exceed 256 Characters!')
-            .required('What is the title of your poem?'),
           category: Yup.string()
             .required('category is required!')
         })} 
         onSubmit={(fields, { setStatus, setSubmitting }) => {
-          const data = { ...fields, poem_content: poem_content }
+          const data = { ...fields, poem_content: poem_content, poem_title: poem_title }
   
-          if(data.poem_content === "") {
+          if(data.poem_content === "" && data.poem_title === "") {
             return;
           }
           
@@ -105,7 +105,7 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
                 alertService.error(error);
               })
           } else {
-            poemService.update(data)
+            poemService.update(data, id)
               .then(() => {
                 alertService.success('You have updated this poem', { keepAfterRouteChange: true });
               })
@@ -119,15 +119,15 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
           ({ isSubmitting, setFieldValue }) =>  {
             useEffect(() => {
               if (!isAddMode) {
-                const fields = ['poet_name', 'poem_title', 'category'];
+                const fields = ['poet_name', 'category'];
                 poemService.getById(id).then(item => {
                   fields.forEach(field => setFieldValue(field, item[field], false));
                 });
               }
             }, []);
             return (<Form>
-              <h1>{isAddMode ? 'Write your poem' : 'Editing an poem'}</h1>
-              <div >
+              <h1>{isAddMode ? 'Write your poem' : <span><em>Editing:</em> {doc}</span> }</h1>
+              <Row>
                 <Alert />
                 <FormGroup as={Col} md={3}>
                   <MySelect label="Poem Category" name="category">
@@ -138,7 +138,7 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
                     <option value="other">Other</option>
                   </MySelect>
                 </FormGroup>
-                <FormGroup as={Col} md>
+                <FormGroup as={Col} md={9}>
                   <MyTextField 
                     label="Names of the Author"
                     name="poet_name"
@@ -146,44 +146,77 @@ function PoemWriter ({ documentStore, edit, onSave, doc, id, history }) {
                     type="text"
                   />
                 </FormGroup>
-                <FormGroup>
-                  <MyTextField 
-                    label="Title of the poem"
-                    name="poem_title"
-                    placeholder="This is Basilwizi Organisation"
-                    type="text"
-                  />
-                </FormGroup>
-                <FormGroup id="editor">
-                    <CKEditor
-                      editor={InlineEditor}
-                      data={poem_content || ""}
-                      onInit={editor => {
-                        if (edit) {
-                          setContent(doc.document);
-                        }
-                      }}
-                      onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setContent(data);
-                        setDirty(true);
-                      }}
-                    />
-                    <div className="poem_content-invalid-feedback">
-                      {dirty && !poem_content ? "Content is required" : null}
-                    </div>
-                </FormGroup>
-                <FormGroup>
-                  <Button type="submit" disabled={isSubmitting} className="btn btn-primary">
-                    {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
+              </Row>
+              <FormGroup id="editor">
+                <label htmlFor="">Title</label>
+                <div className="card shadow" >
+                <CKEditor
+                  editor={InlineEditor}
+                  data={poem_title || ""}
+                  placeholder="Title of the poem ..."
+                  onInit={editor => {
+                    const data = editor.setData();
+                    if (!isAddMode) {
+                      setTitle(data);
+                    }
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setTitle(data);
+                    setDirty(true);
+                  }}
+                  config={{
+                    ckfinder: {
+                      uploadUrl:
+                        `${APIURL}/public/pdf/uploadImage`
+                    }
+                  }}
+                />
+                </div>
+                <div className="poem_title-invalid-feedback">
+                  {dirty && !poem_title ? "Content is required" : null}
+                </div>
+              </FormGroup>
+              <FormGroup id="editor">
+                <label htmlFor="">Contents</label>
+                <div className="card shadow">
+                <CKEditor
+                  editor={InlineEditor}
+                  data={poem_content || ""}
+                  onInit={editor => {
+                    const data = editor.setData();
+                    if (!isAddMode) {
+                      setContent(data);
+                    }
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    setContent(data);
+                    setDirty(true);
+                  }}
+                  config={{
+                    ckfinder: {
+                      uploadUrl:
+                        `${APIURL}/public/pdf/uploadImage`
+                    }
+                  }}
+                />
+                </div>
+                <div className="poem_content-invalid-feedback">
+                  {dirty && !poem_content ? "Content is required" : null}
+                </div>
+              </FormGroup>
+              <FormGroup>
+                  <Button type="submit" disabled={isSubmitting} className="btn btn-success">
+                    {isSubmitting && <FontAwesomeIcon icon="spinner" pulse />}
                     Save
                   </Button>
-                </FormGroup>
-              </div>
+              </FormGroup>
             </Form>)
         }}
       </Formik>
     </section>
   );
 }
+
 export { PoemWriter };

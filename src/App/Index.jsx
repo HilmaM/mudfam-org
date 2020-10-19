@@ -5,11 +5,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import { 
-  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch
+  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch
+  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit
 );
 
 import { Role } from '@/_helpers';
@@ -34,13 +34,13 @@ function App () {
   }, []);
 
   return (
-    <>
-      <Container className={user}>
-        <header className="blog-header py-3">
-          <Navbar className="row flex-nowrap justify-content-between align-items-center">
-            <NavigationBar />
-          </Navbar>
-        </header>
+    <section className={user}>
+      <header className="blog-header this-bg">
+        <Navbar className="row flex-nowrap justify-content-between align-items-center">
+          <NavigationBar />
+        </Navbar>
+      </header>
+      <Container>
         <AdminNav />
         <Switch>
           <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
@@ -54,7 +54,7 @@ function App () {
         </Switch>
       </Container>
       <Footer />
-    </>
+    </section>
   );
 }
 

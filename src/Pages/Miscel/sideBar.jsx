@@ -5,7 +5,7 @@ function SideBar () {
   const user = accountService.userValue;
   return (
     <>
-      <div className="p-4 mb-3 bg-light rounded">
+      <div className="p-4 mb-3 rounded">
         <h4 className="font-italic">About</h4>
         <p className="mb-0">{user ? <em>{user.bio}</em> : <em>Login to see your Bio Right Here</em>}</p>
       </div>

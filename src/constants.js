@@ -14,17 +14,13 @@ export const COUNTRY = {
  
 export const CATEGORY = {
   World: 'world',
-  Zimbabwe: 'zimbabwe',
-  Africa: 'africa',
-  Weather: 'weather',
-  Finance: 'finance',
   Romance: 'romance',
   Music: 'music',
-  Education: 'education',
   Culture: 'culture',
   Travel: 'travel',
   Technology: 'technology',
-  Opinion: 'opinion'
+  Opinion: 'opinion',
+  Folklore: 'folklore'
 } 
 
 export const NAME_TITLES = {

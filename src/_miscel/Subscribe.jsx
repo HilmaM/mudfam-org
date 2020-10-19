@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import { InputGroup, Button } from 'react-bootstrap';
+import { Alert } from '../_components';
 
 import { subscribeService, alertService } from '../_services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,7 +38,10 @@ function SubscribeMe () {
       setTimeout(() => {
         subscribeService.subscribe(fields)
           .then(() => {
-            alertService.success('You have opted to subscriibe to our site. Your email is safe with us and we will not share it with anyone without your permission.', { keepAfterRouteChange: true });
+            alertService.success('You have opted to subscribe to our site. Your email is safe with us and we will not share it with anyone.', { keepAfterRouteChange: true });
+            setState({
+              email: ''
+            });
           })
           .catch(error => {
             setSubmitting(false);
@@ -50,6 +54,7 @@ function SubscribeMe () {
       ({isSubmitting}) => {
         return (
           <Form>
+            <Alert />
             <MyText
               name="email"
               type="email"

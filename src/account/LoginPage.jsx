@@ -62,7 +62,7 @@ function LoginPage ({ history }) {
         (
           <Form >
             <h3 className="card-header">Login</h3>
-            <Row className="card-body">
+            <Row className="card-body shadow">
               <Alert />
               <Col md={{ span: 6 }} className="bg-dark" >
                 <Row>

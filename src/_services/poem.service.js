@@ -2,6 +2,7 @@ import config from 'config';
 import { noAuthWrapper } from '../_helpers';
 
 const baseUrl = `${config.apiUrl}/poems`;
+const uploadImgUrl = `${config.apiUrl}`;
 
 export const poemService = {
   getAll,
@@ -9,6 +10,7 @@ export const poemService = {
   upload,
   create,
   update,
+  imgUrl,
   delete: _delete
 };
 
@@ -34,6 +36,10 @@ function update(id, params) {
       return poem;
     });
 }
+
+function imgUrl() {
+  return noAuthWrapper.get(`${uploadImgUrl}`);
+};
 
 // prefixed with underscore because 'delete' is a reserved word in javascript
 function _delete(id) {

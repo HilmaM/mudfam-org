@@ -2,7 +2,7 @@
 
 .blog-header {
   line-height: 1;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #412507;
 }
 
 .blog-header-logo {
@@ -25,6 +25,13 @@ h1, h2, h3, h4, h5, h6 {
   .display-4 {
     font-size: 3rem;
   }
+}
+
+/* navigation */
+
+.toggle,
+[id^=drop] {
+  display: none;
 }
 
 .nav-scroller {
@@ -96,21 +103,9 @@ h1, h2, h3, h4, h5, h6 {
 .blog-post-meta {
   margin-bottom: 1.25rem;
   color: #999;
+  font-size: 10px;
 }
 
-/*
- * Footer
- */
-.blog-footer {
-  padding: 2.5rem 0;
-  color: #999;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-top: .05rem solid #e5e5e5;
-}
-.blog-footer p:last-child {
-  margin-bottom: 0;
-}
 .bk-col {
   color: blueviolet;
   font-size: 3.2rem;
@@ -125,6 +120,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: khaki;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-variant: small-caps;
+  font-size: 10px;
 }
 
 .subs-container {
@@ -136,4 +132,204 @@ h1, h2, h3, h4, h5, h6 {
   background-image: url("./PagesHub/imgs/abt-1.jpg");
   width: 33.3%;
   height: 400px;
+}
+
+@media all and (max-width: 330px) {
+
+  nav ul li {
+      display: block;
+      width: 94%;
+  }
+
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+}
+
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+* and adding "position:reltive" */
+
+nav ul {
+  float: right;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+
+ul.menu {
+  margin-top: 0.4em;
+}
+
+/* Positioning the navigation items inline */
+
+nav ul li {
+  margin: 0px;
+  display: inline-block;
+}
+
+/* Styling the links */
+
+nav a {
+  color: rgb(78, 17, 17);
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 0 14px;
+  font-weight: 600;
+  margin: 0 0.5em;
+}
+
+@media all and (max-width:992px) {
+
+  #logo {
+      display: block;
+      padding: 0;
+      width: 100%;
+      text-align: center;
+      float: none;
+  }
+
+  #logo a img {
+    height: 30px;
+  }
+
+  nav {
+      margin: 0;
+  }
+
+  /* Hide the navigation menu by default */
+  /* Also hide the  */
+  .toggle+a,
+  .menu {
+      display: none;
+  }
+
+  /* Stylinf the toggle lable */
+  .toggle {
+      display: block;
+      padding: 7px 20px;
+      font-size: 14px;
+      text-decoration: none;
+      border: none;
+      float: right;
+      background-color: #212529;
+      color: #fff;
+      cursor: pointer !important;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      margin-top: 0em;
+  }
+
+  .menu .toggle {
+      float: none;
+      text-align: left;
+      margin: auto;
+      width: 80%;
+      padding: 5px;
+      font-weight: normal;
+      font-size: 16px;
+      letter-spacing: 1px;
+  }
+
+  .toggle:hover {
+      color: #333;
+      background-color: #fff;
+  }
+
+  /* Display Dropdown when clicked on Parent Lable */
+  [id^=drop]:checked+ul {
+      display: block;
+      background: rgba(16, 16, 16, 0.85);
+      padding: 15px 0;
+      text-align: left;
+      width: 100%;
+      z-index: 99999;
+      border: none;
+  }
+
+  /* Change menu item's width to 100% */
+  nav ul li {
+      display: block;
+      width: 100%;
+      padding: 5px 0;
+  }
+
+  nav a:hover,
+  nav ul ul ul a {
+      background-color: transparent;
+  }
+
+  nav ul li ul li .toggle,
+  nav ul ul a,
+  nav ul ul ul a {
+      padding: 14px 20px;
+      color: #FFF;
+      font-size: 17px;
+  }
+
+  label.toggle.toggle-2 {
+      width: 94%;
+      font-size: 13px;
+  }
+
+  nav ul li ul li .toggle,
+  nav ul ul a {
+      background-color: #343a40;
+  }
+
+  /* Hide Dropdowns by Default */
+  nav ul ul {
+      float: none;
+      position: static;
+      color: #ffffff;
+      /* has to be the same number as the "line-height" of "nav a" */
+      text-align: left;
+  }
+
+  /* Hide menus on hover */
+  nav ul ul li:hover>ul,
+  nav ul li:hover>ul {
+      display: none;
+  }
+
+  nav ul {
+      margin-left: 0em;
+  }
+
+  /* Fisrt Tier Dropdown */
+  nav ul ul li {
+      display: block;
+      width: 100%;
+      padding: 0;
+  }
+
+  nav ul ul ul li {
+      position: static;
+      /* has to be the same number as the "width" of "nav ul ul li" */
+  }
+
+  nav ul ul li a {
+      color: #fff;
+      font-size: 0.8em;
+  }
+
+  nav ul li ul li:hover {
+      background: none;
+  }
+
+}
+
+.reader-container {
+  height: 620px;
+  width: 100%;
+  overflow-x: hidden;
+  border: #9c9c0e 1px solid;
 }
