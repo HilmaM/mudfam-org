@@ -108,7 +108,7 @@ function PoemWriter ({ match, history, doc, onSave, poem }) {
               })
               .catch(error => {
                 setSubmitting(false);
-                alertService.error(error);
+                return alertService.error(error);
               })
           } else {
             poemService.update(data, id)
@@ -117,7 +117,7 @@ function PoemWriter ({ match, history, doc, onSave, poem }) {
               })
               .catch(error => {
                 setSubmitting(false);
-                alertService.error(error);
+                return alertService.error(error);
               })
           }
         }} >
