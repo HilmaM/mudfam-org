@@ -1,20 +1,69 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Formik, useField, Field, Form, ErrorMessage } from 'formik';
+import { Formik, useField, Form } from 'formik';
 import * as Yup from 'yup';
-import { Col, InputGroup, Button, FormGroup, FormLabel } from 'react-bootstrap';
+import styled from '@emotion/styled';
+import { Col, Button, FormGroup } from 'react-bootstrap';
 
 import { accountService, alertService } from '../_services';
+import { Alert } from '../_components';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MyTextField = ({label, ...props}) => {
   const [field, meta] = useField(props);
   return (<>
-    <label htmlFor={props.id || props.name}>{label}</label>
-    <input className="text-input form-control" {...field} {...props} />
+    <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+    <input className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
     {meta.touched && meta.error ? (
-      <div className="error" >{meta.error}</div>
+      <StyledErrorMessage>{meta.error}</StyledErrorMessage>
     ) : null}
   </>);
+};
+
+const StyledSelect = styled.select`
+  color: black;
+`;
+
+const StyledErrorMessage = styled.div`
+  color: red;
+  font-size: 10px;
+`;
+
+const StyledLabel = styled.label`
+  color: blue;
+  font-size: 22px;
+`
+
+const MyCheckbox = ({ children, ...props }) => {
+  // We need to tell useField what type of input this is
+  // since React treats radios and checkboxes differently
+  // than inputs/select/textarea.
+  const [field, meta] = useField({ ...props, type: 'checkbox' });
+  return (
+    <>
+      <StyledLabel className="checkbox">
+        <input type="checkbox" {...field} {...props} />
+        {children}
+      </StyledLabel>
+      {meta.touched && meta.error ? (
+        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+      ) : null}
+    </>
+  );
+};
+
+const MySelect = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
+      <StyledSelect className={'form-control' + (meta.touched && meta.error ? ' is-invalid' : '')} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
+      ) : null}
+    </>
+  );
 };
 
 function Update({ history }) {
@@ -84,22 +133,25 @@ function Update({ history }) {
           });
       }}>
       {
-        ({ errors, touched, isSubmitting }) =>  (
+        ({ isSubmitting }) =>  (
           <Form>
+            <h3 className="card-header bg-success" >Create New Account</h3>
             <div className="card-body">
+              <Alert />
               <div className="form-row" >
                 <FormGroup as={Col} >
-                  <FormLabel>Title</FormLabel>
-                  <Field  name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
-                    <option value="" disabled={true} >Select...</option>
+                  <MySelect
+                    name="title"
+                    label="Title"
+                  >
+                    <option value="" disabled={true} >Title...</option>
                     <option value="dr" >Dr</option>
                     <option value="miss" >Miss</option>
                     <option value="mr" >Mr</option>
                     <option value="mrs" >Mrs</option>
                     <option value="ms" >Ms</option>
                     <option value="prof" >Prof</option>
-                  </Field>
-                  <ErrorMessage name="title" component="div" className="invalid-feedback" />
+                  </MySelect>
                 </FormGroup>
                 <FormGroup as={Col} md={5} >
                   <MyTextField 
@@ -118,17 +170,14 @@ function Update({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="3" >
-                <FormLabel>Gender</FormLabel>
-                  <Field
-                    as="select"
+                  <MySelect
                     name="gender"
-                    className={'form-control' + (errors.gender && touched.gender ? ' is-invalid' : '')}
+                    label="Gender"
                   >
                     <option value="" disabled={true} >Choose...</option>
                     <option value="female" >Female</option>
                     <option value="male" >Male</option>
-                  </Field>
-                  <ErrorMessage name="gender" component="div" className="invalid-feedback" />
+                  </MySelect>
                 </FormGroup>
               </div>
               <div className="form-row" >
@@ -142,12 +191,9 @@ function Update({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="3" >
-                <FormLabel>Country</FormLabel>
-                  <Field
-                    as="select"
-                    type="text"
+                  <MySelect
                     name="country"
-                    className={'form-control' + (errors.country && touched.country ? ' is-invalid' : '')}
+                    label="Country"
                   >
                     <option value="" disabled={true} >Choose...</option>
                     <option value="zimbabwe" >Zimbabwe</option>
@@ -156,8 +202,7 @@ function Update({ history }) {
                     <option value="america" >America</option>
                     <option value="europe" >Europe</option>
                     <option value="australia" >Australia</option>
-                  </Field>
-                  <ErrorMessage name="country" component="div" className="invalid-feedback" />
+                  </MySelect>
                 </FormGroup>
                 <FormGroup as={Col} md="4" >
                   <MyTextField 
@@ -169,17 +214,11 @@ function Update({ history }) {
               </div>
               <div className="form-row" >
                 <FormGroup as={Col} md="4" >
-                  <FormLabel>Email</FormLabel>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="inputGroupPrepend" >@</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <MyTextField 
-                      name="email"
-                      type="email"
-                      aria-describedby="inputGroupPrepend"
-                    />
-                  </InputGroup>
+                  <MyTextField 
+                    name="email"
+                    label="Email"
+                    type="email"
+                  />
                 </FormGroup>
               </div>
               <div>
@@ -203,37 +242,32 @@ function Update({ history }) {
                 </FormGroup>
               </div>
               <FormGroup>
-                <label htmlFor="bio" className="form-input" >Biograph</label>
-                <Field 
+                <MyTextField 
                   as="textarea"
+                  label="Bio"
                   name="bio"
-                  className={"form-control form-input" + (errors.bio && touched.bio ? ' is-invalid' : '')}
                 />
-                <ErrorMessage name="bio" component="div" className="invalid-feedback" />
               </FormGroup>
-              <div className="form-row" >
-                <FormGroup as={Col} >
-                  <Button className="btn btn-primary" type="submit" disabled={isSubmitting}  >
-                    {isSubmitting && 
-                      <span className="fa fa-spinner" ></span>
-                    }
-                    Update
-                  </Button>
-                  <Link to={'.'} className="btn btn-link">Back to Profile</Link>
-                  <Button 
-                    className="btn btn-sm btn-danger" onClick={() => onDelete()} disabled={isDeleting}
-                  >
-                    {isDeleting
-                      && <span className="spinner-border spinner-border-sm"></span>
-                    }
-                    <span>Delete</span>
-                  </Button>
-                </FormGroup>
-              </div>
+              <FormGroup>
+                <Button className="btn btn-primary" type="submit" disabled={isSubmitting}  >
+                  {isSubmitting && 
+                    <FontAwesomeIcon icon="spinner" pulse />
+                  }
+                  Update Account
+                </Button>
+                <Link to={'.'} className="btn btn-link">Back to Profile</Link>
+                <Button 
+                  className="btn btn-sm btn-danger" onClick={() => onDelete()} disabled={isDeleting}
+                >
+                  {isDeleting
+                    && <FontAwesomeIcon icon="spinner" pulse />
+                  }
+                  <span>Delete</span>
+                </Button>
+              </FormGroup>
             </div>
           </Form>
-        )
-      }
+      )}
     </Formik>
   )
 };

@@ -65,13 +65,19 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-function PoemWriter ({ match, history, doc, onSave }) {
+function PoemWriter ({ match, history, doc, onSave, poem }) {
   const { id } = match.params;
   const isAddMode = !id;
   const [poem_content, setContent] = useState("");
   const [poem_title, setTitle] = useState("");
   const [dirty, setDirty] = useState(false);
   const APIURL = poemService.imgUrl();
+
+  useEffect(() => {
+    poemService.getById(id).then(x => {
+      poem(x);
+    });
+  }, []);
 
   return (
     <section className="container px-md-3" >
@@ -122,11 +128,15 @@ function PoemWriter ({ match, history, doc, onSave }) {
                 const fields = ['poet_name', 'category'];
                 poemService.getById(id).then(item => {
                   fields.forEach(field => setFieldValue(field, item[field], false));
+                  poem = {
+                    poem_content: item.poem_content,
+                    poem_title: item.poem_title
+                  }
                 });
               }
             }, []);
             return (<Form>
-              <h1>{isAddMode ? 'Write your poem' : <span><em>Editing:</em> {doc}</span> }</h1>
+              <h1>{isAddMode ? 'Write your poem' : <span><em>Editing:</em></span> }</h1>
               <Row>
                 <Alert />
                 <FormGroup as={Col} md={3}>
@@ -155,21 +165,14 @@ function PoemWriter ({ match, history, doc, onSave }) {
                   data={poem_title || ""}
                   placeholder="Title of the poem ..."
                   onInit={editor => {
-                    const data = editor.setData();
                     if (!isAddMode) {
-                      setTitle(data);
+                      setTitle(poem.poem_title);
                     }
                   }}
                   onChange={(event, editor) => {
                     const data = editor.getData();
                     setTitle(data);
                     setDirty(true);
-                  }}
-                  config={{
-                    ckfinder: {
-                      uploadUrl:
-                        `${APIURL}/public/pdf/uploadImage`
-                    }
                   }}
                 />
                 </div>
@@ -184,21 +187,14 @@ function PoemWriter ({ match, history, doc, onSave }) {
                   editor={InlineEditor}
                   data={poem_content || ""}
                   onInit={editor => {
-                    const data = editor.setData();
                     if (!isAddMode) {
-                      setContent(data);
+                      setContent(poem.poem_content);
                     }
                   }}
                   onChange={(event, editor) => {
                     const data = editor.getData();
                     setContent(data);
                     setDirty(true);
-                  }}
-                  config={{
-                    ckfinder: {
-                      uploadUrl:
-                        `${APIURL}/public/pdf/uploadImage`
-                    }
                   }}
                 />
                 </div>
