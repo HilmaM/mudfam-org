@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PoemWriter } from './makePoem';
 import { PoemPost } from './poemPost';
 import { Personal } from '../Miscel/personal';
+import { Africa } from '../Miscel/africa';
 
 function Poetry({ match }) {
   const { path } = match;
@@ -56,6 +57,7 @@ function Poetry({ match }) {
               <Route path={`${path}/read/:id`} component={PoemPost} />
               <Route path={`${path}/edit/:id`} component={PoemWriter} />
               <Route path={`${path}/personal`} component={Personal} />
+              <Route path={`${path}/africa`} component={Africa} />
             </Switch>
           </div>
         </Col>

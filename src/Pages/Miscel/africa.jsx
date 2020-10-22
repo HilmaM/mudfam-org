@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { poemService } from '../../_services';
 
-function Personal ({ match }) {
+function Africa ({ match }) {
   const { path } = match;
   const [poems, setPoems] = useState(null);
 
@@ -16,7 +16,7 @@ function Personal ({ match }) {
     {
       poems &&
         poems
-          .filter(poem => poem.category === 'personal')
+          .filter(poem => poem.category === 'africa')
           .map(p => 
           <div key={p.id} className="col-md-4" >
             <div className="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -42,4 +42,4 @@ function Personal ({ match }) {
   </>);
 };
 
-export { Personal }; 
+export { Africa }; 
