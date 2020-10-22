@@ -13,6 +13,7 @@ export const COUNTRY = {
 }
  
 export const CATEGORY = {
+  Personal: 'personal',
   World: 'world',
   Romance: 'romance',
   Music: 'music',

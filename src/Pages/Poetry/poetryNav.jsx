@@ -28,7 +28,7 @@ function PoemNav () {
         <input id="drop-p" type="checkbox"/>
         <ul className="menu mr-auto" style={{ fontSize: '8px' }} >
           {Object.keys(CATEGORY).map(key=>
-            <li key={key.id} >
+            <li key={key} >
               <NavLink to={`/pages/poetry/${key.toLowerCase()}`} className="nav-item nav-link">{key.toUpperCase()}</NavLink>
             </li>
           )}
