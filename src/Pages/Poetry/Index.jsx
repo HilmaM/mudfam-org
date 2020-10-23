@@ -3,7 +3,6 @@ import { Container, Row, Col, Form, Button, InputGroup, Modal } from 'react-boot
 import { Switch, Route, Link } from 'react-router-dom';
 
 import { accountService } from '../../_services';
-import { SideBar } from '../Miscel/sideBar';
 import { Role } from '../../_helpers';
 import { SubscribeMe } from '../../_miscel';
 import { PoemList } from './poemList';
@@ -11,8 +10,7 @@ import { PoemNav } from './poetryNav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PoemWriter } from './makePoem';
 import { PoemPost } from './poemPost';
-import { Personal } from '../Miscel/personal';
-import { Africa } from '../Miscel/africa';
+import { SideBar, Personal, Africa, World, Culture, Folklore, Romance, SearchBar } from '../Miscel';
 
 function Poetry({ match }) {
   const { path } = match;
@@ -58,10 +56,14 @@ function Poetry({ match }) {
               <Route path={`${path}/edit/:id`} component={PoemWriter} />
               <Route path={`${path}/personal`} component={Personal} />
               <Route path={`${path}/africa`} component={Africa} />
+              <Route path={`${path}/world`} component={World} />
+              <Route path={`${path}/romance`} component={Romance} />
+              <Route path={`${path}/culture`} component={Culture} />
+              <Route path={`${path}/folklore`} component={Folklore} />
             </Switch>
           </div>
         </Col>
-        <Col md={4} role="aside" className="blog-sidebar">
+        <Col md={4} role="aside" className="blog-sidebar py-4">
           <Form>
             <InputGroup>
               <Form.Control 
@@ -74,7 +76,9 @@ function Poetry({ match }) {
             </InputGroup>
           </Form>
           <SideBar />
-          <SubscribeMe />
+          {
+            !user && <SubscribeMe />
+          }
         </Col>
       </Row>
     </Container>
