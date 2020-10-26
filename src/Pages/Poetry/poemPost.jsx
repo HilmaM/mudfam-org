@@ -54,7 +54,7 @@ function PoemPost ({ match }) {
             </nav>
             <p className="blog-post-meta">{moment(poem.createdAt).format('MMMM Do, YYYY')} by <a href="htp://#">{poem.poet_name}</a></p>
             <div style={{wordWrap:'break-word',display:'inline-block'}}>
-              <p dangerouslySetInnerHTML={{__html:poem.poem_content}} className="editor" />
+              <p dangerouslySetInnerHTML={{__html:poem.poem_content}} className="reader-page-font" id="editor" />
             </div>
           </div>
         }

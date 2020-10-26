@@ -5,11 +5,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import { 
-  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit
+  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit
+  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends
 );
 
 import { Role } from '@/_helpers';
@@ -22,6 +22,7 @@ import { PagesIndex } from '@/Pages/Index';
 import { NavigationBar } from '@/navBar';
 import { AdminNav } from '../navBar/AdminNavbar';
 import { Profile } from '../profile/Index';
+import { Author } from '../about';
 
 function App () {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ function App () {
           <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
           <Route path="/home" component={ HomeIndex } />
           <Route path="/account" component={Account} />
+          <Route path="/author" component={ Author } />
           <Redirect from="*" to="/" />
         </Switch>
       </Container>

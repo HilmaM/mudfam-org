@@ -22,7 +22,7 @@ function Details({ match }) {
                 </Col>
               </Row>
             </Col>
-            <Col ClassName="bg-primary text-white d-flex flex-column position-static" >
+            <Col className="bg-primary text-white d-flex flex-column position-static" >
                 <Row className="p-3">
                   <Col md={12} >
                     <p> {user.title} {user.first_name} {user.last_name}</p>
@@ -33,6 +33,8 @@ function Details({ match }) {
                       {user.country}
                       <br />
                       {user.phone_number}
+                      <br/>
+                      {user.bio}
                     </p>
                     <Row className="p-3" >
                       <Col xs={4} >
