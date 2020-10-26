@@ -67,7 +67,7 @@ function Author() {
                 <Tab.Pane eventKey="social">
                   <Row>
                     <Col xs={1} >
-                      <Link to={'#'} >
+                      <Link to={'https://github.com/HilmaM'} >
                         <FontAwesomeIcon icon={['fab', 'github']}  size="2x" color="grey" />
                         <div className="tooltip" >Github</div>
                       </Link>
