@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Toast } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { SubscribeMe } from '../_miscel/Subscribe';
 
 const ControlledCarousel = () => {
   const [index, setIndex] = useState(0);
@@ -63,12 +64,12 @@ const ControlledCarousel = () => {
           </p>
           <p>
             About the 
-            <Link to={'/about'} className="text-muted"> Author</Link> .
+            <Link to={'/author'} className="text-muted"> Author</Link> .
           </p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-  );
+    );
 }
 
 function Home() {
@@ -76,7 +77,40 @@ function Home() {
     <div className="container" >
       <ControlledCarousel />
     </div>
+    <Subscribe />
   </section>);
 };
+
+function Subscribe() {
+  const [show, setShow] = useState(true);
+  const toggleShow = () => setShow(!show);
+  return (
+    <div
+      aria-live="polite"
+      aria-atomic="true"
+      style={{
+        position: 'relative',
+        minHeight: '100px',
+      }}
+    >
+      <Toast show={show} onClose={toggleShow} delay={60000} autohide
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+        }}
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Bootstrap</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>
+          <SubscribeMe />
+        </Toast.Body>
+      </Toast>
+    </div>
+  );
+}
  
 export {Home};

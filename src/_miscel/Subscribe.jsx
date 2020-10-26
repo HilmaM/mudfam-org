@@ -39,9 +39,6 @@ function SubscribeMe () {
         subscribeService.subscribe(fields)
           .then(() => {
             alertService.success('You have opted to subscribe to our site. Your email is safe with us and we will not share it with anyone.', { keepAfterRouteChange: true });
-            setState({
-              email: ''
-            });
           })
           .catch(error => {
             setSubmitting(false);

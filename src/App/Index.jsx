@@ -5,11 +5,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import { 
-  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends
+  faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends, faUsersCog
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends
+  fab, faAngleDoubleUp, faMapMarker, faPhone, faEnvelopeOpen, faDonate, faDotCircle, faRecycle, faReply, faArchive, faGlobeAfrica, faNewspaper, faSpinner, faPencilAlt, faPaperclip, faThumbsUp, faUserCircle, faSignInAlt, faSearch, faFilePdf, faEdit, faMobileAlt, faVolleyballBall, faFootballBall, faLaptop, faCampground, faGamepad, faMusic, faUserFriends, faUsersCog
 );
 
 import { Role } from '@/_helpers';

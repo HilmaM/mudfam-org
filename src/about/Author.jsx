@@ -2,17 +2,22 @@ import  React from 'react';
 import { Container, Row, Col, Tab, Nav, Figure, Image, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import FigureImage from 'react-bootstrap/esm/FigureImage';
+import FigureCaption from 'react-bootstrap/esm/FigureCaption';
 
 function Author() {
   return (<section className="p-5" >
     <Row>
           <Tab.Container defaultActiveKey="details">
             <Col sm={2} >
-              <Image
-                src="src/fonts/images/mapenzi.png"
-                width="150px"
-                alt="Author"
-              />
+              <Figure>
+                <FigureImage
+                  src="src/fonts/images/mapenzi.png"
+                  width="150px"
+                  alt="Author"
+                />
+              </Figure>
+              <FigureCaption>Mapenzi Mudimba</FigureCaption>
             </Col>
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
@@ -48,7 +53,7 @@ function Author() {
                     </Col>
                     <Col xs={11} >
                       <p>
-                        C/O Midland State University, P Bag 9055, Gweru
+                        C/O Midlands State University, P Bag 9055, Gweru
                       </p>
                       <p>
                         hazelman@live.com
@@ -112,10 +117,10 @@ function Author() {
                   </Row>
                 </Tab.Pane>
                 <Tab.Pane eventKey="projects">
-                  <Table className="table-striped hover" >
+                  <Table striped bordered hover variant="dark" >
                     <thead>
                       <tr>
-                        <th>Project Name</th>
+                        <th>Project</th>
                         <th>Description</th>
                         <th>Link to project</th>
                       </tr>
