@@ -1,10 +1,10 @@
 import { BehaviorSubject } from 'rxjs';
 
-import config from 'config';
-import { fetchWrapper, history } from '@/_helpers';
+import { fetchWrapper } from '@/_helpers';
+import { server } from '../cfg';
 
 const userSubject = new BehaviorSubject(null);
-const baseUrl = `${config.apiUrl}/accounts`;
+const baseUrl = `${server.url}/accounts`;
 
 export const accountService = {
   login,
@@ -39,7 +39,6 @@ function logout() {
   fetchWrapper.post(`${baseUrl}/revoke-token`, {});
   stopRefreshTokenTimer();
   userSubject.next(null);
-  history.push('/account/login');
 }
 
 function refreshToken() {

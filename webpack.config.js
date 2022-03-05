@@ -1,81 +1,108 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path');
+// Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-module.exports = {
-  mode: 'development',
-  entry: {
-    index: './src/index.jsx',
-  },
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+
+const isProduction = process.env.NODE_ENV == "production";
+
+const stylesHandler = "style-loader";
+
+const config = {
+  entry: "./src/index.js",
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
+    clean: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        use: {
-          loader: 'babel-loader'
-        }
+  devServer: {
+    open: true,
+    host: "localhost",
+    static: {
+      directory: path.join(__dirname, "build")
+    },
+    compress: true,
+    port: 8080,
+    client: {
+      logging: 'info',
+      overlay: {
+        errors: true,
+        warnings: false
       },
-      {
-        test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'less-loader' }
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/font-woff"
-      }, {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/font-woff"
-      }, {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=application/octet-stream"
-      }, {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: "file-loader"
-      }, {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: "url-loader?limit=10000&mimetype=image/svg+xml"
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      '@': path.resolve(__dirname, 'src/'),
-      FroalaEditor: 'file_name'
-    }
+      progress: true,
+      reconnect: 5,
+      webSocketTransport: 'ws'
+    },
+    webSocketServer: 'ws',
+    https: false,
+    historyApiFallback: true,
+    hot: 'only',
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:7180',
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      title: 'Mudfam Blog',
+      template: "./src/index.html",
     }),
+
+    // Add your plugins here
+    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
-  devServer: {
-    historyApiFallback: true
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/i,
+        loader: "babel-loader",
+        exclude: ["/node_modules/"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
+      },
+      {
+        test: /\.(css|less)$/i,
+        use: [stylesHandler, "css-loader", "postcss-loader", "less-loader"],
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        type: "asset",
+      },
+      {
+        test: /\.(png|svg|jpdg|jpeg|gif)$/i,
+        type: 'asset/resource'
+      },
+    ],
   },
-  externals: {
-    // global app config object
-    config: JSON.stringify({
-      apiUrl: 'http://localhost:7180'
-    })
+  resolve: {
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+    },
+    fallback: { "buffer": false }
+  },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: /[\\/]node_modules[\\/]/,
+        chunks: 'all'
+      }
+    }
+  },
+};
+
+module.exports = () => {
+  if (isProduction) {
+    config.mode = "production";
+
+    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+  } else {
+    config.mode = "development";
   }
-}
+  return config;
+};

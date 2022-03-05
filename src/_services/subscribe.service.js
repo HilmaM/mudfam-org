@@ -1,7 +1,7 @@
-import config from 'config';
-import { noAuthWrapper } from '@/_helpers';
+import { fetchWrapper } from '@/_helpers';
+import { server } from '../cfg';
 
-const baseUrl = `${config.apiUrl}/subscribers`;
+const baseUrl = `${server.url}/subscribers`;
 
 export const subscribeService = {
   subscribe,
@@ -11,7 +11,7 @@ export const subscribeService = {
 };
 
 function subscribe(params) {
-  return noAuthWrapper.post(`${baseUrl}/saveemail`, params);
+  return fetchWrapper.post(`${baseUrl}/saveemail`, params);
 }
 
 function getAll() {

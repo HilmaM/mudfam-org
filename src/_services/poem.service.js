@@ -1,8 +1,8 @@
-import config from 'config';
-import { noAuthWrapper } from '../_helpers';
+import { fetchWrapper } from '../_helpers';
+import { server } from '../cfg';
 
-const baseUrl = `${config.apiUrl}/poems`;
-const uploadImgUrl = `${config.apiUrl}`;
+const baseUrl = `${server.url}/poems`;
+const uploadImgUrl = `${server.url}`;
 
 export const poemService = {
   getAll,
@@ -15,35 +15,35 @@ export const poemService = {
 };
 
 function upload(params) {
-  return noAuthWrapper.post(`${baseUrl}/upload`, params);
+  return fetchWrapper.post(`${baseUrl}/upload`, params);
 }
 
 function getAll() { 
-  return noAuthWrapper.get(baseUrl);
+  return fetchWrapper.get(baseUrl);
 }
 
 function getById(id) {
-  return noAuthWrapper.get(`${baseUrl}/${id}`);
+  return fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
 function create(params) {
-  return noAuthWrapper.post(`${baseUrl}/create`, params);
+  return fetchWrapper.post(`${baseUrl}/create`, params);
 }
 
 function update(id, params) {
-  return noAuthWrapper.put(`${baseUrl}/${id}`, params)
+  return fetchWrapper.put(`${baseUrl}/${id}`, params)
     .then(poem => {
       return poem;
     });
 }
 
 function imgUrl() {
-  return noAuthWrapper.get(`${uploadImgUrl}`);
+  return fetchWrapper.get(`${uploadImgUrl}`);
 };
 
 // prefixed with underscore because 'delete' is a reserved word in javascript
 function _delete(id) {
-  return noAuthWrapper.delete(`${baseUrl}/${id}`)
+  return fetchWrapper.delete(`${baseUrl}/${id}`)
     .then(x => {
       return x;
     });
